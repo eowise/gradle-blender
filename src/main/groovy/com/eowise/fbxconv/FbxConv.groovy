@@ -41,7 +41,7 @@ class FbxConv extends DefaultTask {
     def run() {
         fbxFiles.each {
             File file ->
-                String outputFile = file.name.replaceFirst(~/\.[^\.]+$/, '') + '.g3db'
+                String outputFile = file.name.replaceFirst(~/\.[^\.]+$/, '') + ".${format.toLowerCase()}"
                 project.exec {
                     commandLine 'fbx-conv'
                     args '-o', format, file
