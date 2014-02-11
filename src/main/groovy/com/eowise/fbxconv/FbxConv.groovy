@@ -2,6 +2,7 @@ package com.eowise.fbxconv
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.FileCollection
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
@@ -11,11 +12,18 @@ import org.gradle.api.tasks.TaskAction
  */
 class FbxConv extends DefaultTask {
 
+    @Input
+    protected String format
+
     @InputFiles
     protected FileCollection fbxFiles
 
     @OutputDirectory
     protected File outputDir
+
+    def FbxConv() {
+        format = 'G3DB'
+    }
 
     def convert(FileCollection files) {
         fbxFiles = files
@@ -25,6 +33,10 @@ class FbxConv extends DefaultTask {
         outputDir = file
     }
 
+    def format(String value) {
+        format = value
+    }
+
     @TaskAction
     def run() {
         fbxFiles.each {
@@ -32,14 +44,14 @@ class FbxConv extends DefaultTask {
                 String outputFile = file.name.replaceFirst(~/\.[^\.]+$/, '') + '.g3db'
                 project.exec {
                     commandLine 'fbx-conv'
-                    args '-o', 'G3DB', file
+                    args '-o', format, file
                 }
                 project.copy {
                     from file.parentFile
                     include outputFile
                     into outputDir
                 }
-                project.delete(outputFile)
+                project.delete("${file.parentFile}/${outputFile}")
         }
     }
 }
