@@ -1,4 +1,4 @@
-package com.eowise.fbxconv
+package com.eowise.blender.fbxconv
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.FileCollection
@@ -44,7 +44,7 @@ class FbxConv extends DefaultTask {
                 String outputFile = file.name.replaceFirst(~/\.[^\.]+$/, '') + ".${format.toLowerCase()}"
                 project.exec {
                     commandLine 'fbx-conv'
-                    args '-o', format, file
+                    args '-f', '-o', format, file
                 }
                 project.copy {
                     from file.parentFile
