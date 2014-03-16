@@ -1,8 +1,12 @@
 package com.eowise.blender.render
 
+import com.eowise.blender.render.specs.RenderAnimationSpec
 import com.eowise.blender.render.specs.RenderSceneSpec
 import org.gradle.api.DefaultTask
 import org.gradle.api.Task
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
 /**
@@ -10,10 +14,35 @@ import org.gradle.api.tasks.TaskAction
  */
 class RenderAnimation extends DefaultTask {
 
-    RenderSceneSpec spec;
+    RenderAnimationSpec spec;
 
     RenderAnimation() {
-        spec = new RenderSceneSpec()
+        spec = new RenderAnimationSpec()
+    }
+
+    @InputFile
+    File getBlendFile() {
+        return spec.blendFile
+    }
+
+    @Input
+    String getScene() {
+        return spec.scene
+    }
+
+    @OutputDirectory
+    File getOutputDirectory() {
+        return spec.outputPath
+    }
+
+    @Input
+    int getStart() {
+        return spec.start
+    }
+
+    @Input
+    int getEnd() {
+        return spec.end
     }
 
     Task configure(Closure configureClosure) {
@@ -29,14 +58,14 @@ class RenderAnimation extends DefaultTask {
         project.delete spec.blendFile.getParent() + '/tmp'
 
         project.exec {
-            commandLine 'blender', '-b', spec.blendFile, '-F', 'PNG', '-S', spec.scene, '-s', start, '-e', end, '-a'
+            commandLine 'blender', '-b', getBlendFile(), '-o', "${temporaryDir}/${name}-####", '-F', 'PNG', '-S', getScene(), '-s', getStart(), '-e', getEnd(), '-a'
         }
 
         project.copy {
-            from spec.blendFile.getParent() + '/tmp'
-            into spec.outputPath
+            from temporaryDir
+            into getOutputDirectory()
             include '*.png'
-            rename ~/([^\.]+)\.png/, spec.scene.toLowerCase() + '$1.png'
+            rename ~/${name}-(\d+)\.png/, spec.scene.toLowerCase() + '-$1.png'
         }
     }
 }
