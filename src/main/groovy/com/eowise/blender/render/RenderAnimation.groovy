@@ -54,8 +54,7 @@ class RenderAnimation extends DefaultTask {
 
     @TaskAction
     def run() {
-        project.delete project.fileTree(dir: spec.blendFile.getParent(),  include: '*.png')
-        project.delete spec.blendFile.getParent() + '/tmp'
+        project.delete project.fileTree(temporaryDir).include('*')
 
         project.exec {
             commandLine 'blender', '-b', getBlendFile(), '-o', "${temporaryDir}/${name}-####", '-F', 'PNG', '-S', getScene(), '-s', getStart(), '-e', getEnd(), '-a'

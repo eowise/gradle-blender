@@ -45,6 +45,8 @@ class RenderImage extends DefaultTask {
     @TaskAction
     def run() {
 
+        project.delete project.fileTree(temporaryDir).include('*')
+
         project.exec {
             commandLine 'blender', '-b', getBlendFile(), '-o', "${temporaryDir}/${name}-####", '-F', 'PNG', '-S', getScene(), '-f', 1
         }
