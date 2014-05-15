@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    {% include head.html %}
+    <body class="index">
+        <div id="root">
+            {% include menu.html %}
+            <div id="header">
+                <div class="blurred">
+                    <div class="jumbo">
+                        <h1 class="heading">We are a mobile games studio at Lyon, France.</h1>
+                        <p class="sub-heading"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+		    <div class="product-desc">
+		        <div>
+		            <h3>{{ page.shorter }}</h3>
+		            {{ content }}
+		        </div>
+		        <div>
+		            <a href="https://play.google.com/store/apps/details?id=com.eowise.cityevolution">
+		              <img alt="Get it on Google Play"
+		                   src="https://developer.android.com/images/brand/fr_generic_rgb_wo_60.png" />
+		            </a>
+		        </div>
+		    </div>
+		    <div class="row">
+		        <div class="small-12 columns">
+		            <h4>Overview</h4>
+		        </div>
+		    </div>
+		    <div class="product-quotes">
+		        <div class="small-12 columns">
+		            <h4>Quotes</h4>
+		        </div>
+		        {% for quote in page.quotes %}
+		        <p>{{ quote }}</p>
+		        {% endfor %}
+		    </div>
+        </div>
+        {% include footer.html %}
+    </body>
+</html>

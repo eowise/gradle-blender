@@ -1,20 +1,17 @@
 ---
 layout: default
+title: Home
 ---
-
-<div class="home">
-
-  <h1>Posts</h1>
-
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      </li>
+<div id="content">
+    <div class="row">
+        <h2 class="small-12 columns">Our games</h2>
+    </div>
+    {% for project in site.projects %}
+    <div class="row">
+        <div class="small-12 medium-6 large-4 columns small-centered text-center">
+            <h3><a href="{{ project.url }}">{{ project.name }}</a></h3>
+            <p>{{ project.shorter }}</p>
+        </div>
+    </div>
     {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
 </div>

@@ -1,12 +1,8 @@
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-    <meta name="viewport" content="width=device-width">
-    <meta name="description" content="{{ site.description }}">
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
-
-</head>
+    <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='content-type'>
+        <meta charset='utf-8'>
+        <title>{{ page.title }} - {{ site.name }}</title>
+        <meta content='Bootply' name='generator'>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
+        <link href="/css/base.css" rel="stylesheet" type="text/css">
+    </head>

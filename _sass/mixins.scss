@@ -1,0 +1,18 @@
+@mixin verticalMargin() {
+    margin-top:50px;
+    margin-bottom:50px;
+}
+
+@mixin verticalPadding() {
+    padding-top:50px;
+    padding-bottom:50px;
+}
+
+
+.verticalMargin {
+    @include verticalMargin();
+}
+
+.verticalPadding {
+    @include verticalPadding();
+}
