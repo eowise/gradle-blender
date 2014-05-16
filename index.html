@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Home
+heading: We are a mobile games studio at Lyon, France.
 ---
 <div id="content">
     <div class="row">
@@ -9,6 +10,7 @@ title: Home
     {% for project in site.projects %}
     <div class="row">
         <div class="small-12 medium-6 large-4 columns small-centered text-center">
+            <img src="/images/{{ project.id }}/icon.png" />
             <h3><a href="{{ project.url }}">{{ project.name }}</a></h3>
             <p>{{ project.shorter }}</p>
         </div>

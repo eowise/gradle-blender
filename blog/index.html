@@ -1,11 +1,18 @@
 ---
-layout: page
+layout: default
+heading: Blog
 ---
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      {{ post.excerpt }}
-    </li>
-  {% endfor %}
-</ul>
+<div id="content">
+    <div class="row">
+        <div class="small-8 columns">
+			<ul>
+			  {% for post in site.posts %}
+			    <li>
+			      <a href="{{ post.url }}">{{ post.title }}</a>
+			      {{ post.excerpt }}
+			    </li>
+			  {% endfor %}
+			</ul>
+        </div>
+    </div>
+</div>

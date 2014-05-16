@@ -7,15 +7,15 @@
             <div id="header">
                 <div class="blurred">
                     <div class="jumbo">
-                        <h1 class="heading">We are a mobile games studio at Lyon, France.</h1>
-                        <p class="sub-heading"></p>
+                        <h1 class="heading">{{ page.heading }}</h1>
+                        <p class="sub-heading">{{ page.sub_heading }}</p>
                     </div>
                 </div>
             </div>
             <div class="clearfix"></div>
 		    <div class="product-desc">
 		        <div>
-		            <h3>{{ page.shorter }}</h3>
+		        	<h3>{{ page.name }}</h3>
 		            {{ content }}
 		        </div>
 		        <div>
@@ -29,6 +29,10 @@
 		        <div class="small-12 columns">
 		            <h4>Overview</h4>
 		        </div>
+		  		{% for feature in page.overview %}
+		  		<p>{{ feature.title }}</p>
+		        <p>{{ feature.text }}</p>
+		        {% endfor %}
 		    </div>
 		    <div class="product-quotes">
 		        <div class="small-12 columns">
