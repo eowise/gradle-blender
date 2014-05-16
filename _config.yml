@@ -22,4 +22,9 @@ prose:
     _projects:
       - name: "name"
         field:
+          label: "Name"
           element: "text"
+      - name: "quotes"
+        field:
+          label: "Quotes"
+          element: "multiselect"
