@@ -15,3 +15,11 @@ markdown: kramdown
 permalink: /blog/:categories/:year/:month/:day/:title
 gems:
 - jekyll-compass
+
+#Prose
+prose:
+  metadata:
+    _projects:
+      - name: "name"
+        field:
+          element: "text"
