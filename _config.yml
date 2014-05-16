@@ -28,3 +28,4 @@ prose:
         field:
           label: "Quotes"
           element: "multiselect"
+          alterable: true
