@@ -20,12 +20,15 @@ gems:
 prose:
   metadata:
     _projects:
+      - name: "layout"
+        field:
+          element: "hidden"
+          value: "project"
       - name: "name"
         field:
           label: "Name"
           element: "text"
-      - name: "quotes"
+      - name: "shorter"
         field:
-          label: "Quotes"
-          element: "multiselect"
-          alterable: true
+          label: "Shorter"
+          element: "textarea"
