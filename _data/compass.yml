@@ -1,7 +1,6 @@
 ---
 require:
 - jekyll-compass
-project_path: "/home/aurel/Dev/Eowise/web"
 http_path: "/"
 css_dir: css
 sass_dir: _sass
