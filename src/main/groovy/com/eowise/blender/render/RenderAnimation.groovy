@@ -57,7 +57,7 @@ class RenderAnimation extends DefaultTask {
         project.delete project.fileTree(temporaryDir).include('*')
 
         project.exec {
-            commandLine 'blender', '-b', getBlendFile(), '-o', "${temporaryDir}/${name}-####", '-F', 'PNG', '-S', getScene(), '-s', getStart(), '-e', getEnd(), '-a'
+            commandLine 'blender', '-b', getBlendFile(), '-S', getScene(), '-o', "${temporaryDir}/${name}-####", '-F', 'PNG', '-s', getStart(), '-e', getEnd(), '-a'
         }
 
         project.copy {

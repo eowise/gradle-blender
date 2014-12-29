@@ -48,7 +48,7 @@ class RenderImage extends DefaultTask {
         project.delete project.fileTree(temporaryDir).include('*')
 
         project.exec {
-            commandLine 'blender', '-b', getBlendFile(), '-o', "${temporaryDir}/${name}-####", '-F', 'PNG', '-S', getScene(), '-f', 1
+            commandLine 'blender', '-b', getBlendFile(), '-S', getScene(), '-o', "${temporaryDir}/${name}-####", '-F', 'PNG', '-f', 1
         }
 
         project.copy {
