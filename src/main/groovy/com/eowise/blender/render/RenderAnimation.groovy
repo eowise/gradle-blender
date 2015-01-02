@@ -64,7 +64,7 @@ class RenderAnimation extends DefaultTask {
             from temporaryDir
             into getOutputDirectory()
             include '*.png'
-            rename ~/${name}-(\d+)\.png/, spec.scene.toLowerCase() + '-$1.png'
+            rename ~/${name}-(\d+)\.png/, spec.scene + '-$1.png'
         }
     }
 }

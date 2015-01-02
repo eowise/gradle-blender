@@ -55,7 +55,7 @@ class RenderImage extends DefaultTask {
             from temporaryDir
             into getOutputDirectory()
             include "${name}-0001.png"
-            rename { fileName -> getScene().toLowerCase() + '.png'}
+            rename { fileName -> getScene() + '.png'}
         }
     }
 }
