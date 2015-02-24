@@ -29,6 +29,11 @@ class RenderImage extends DefaultTask {
         return spec.scene
     }
 
+    @Input
+    String getFileName() {
+        return spec.rename(spec.scene) + '.png'
+    }
+
     @OutputDirectory
     File getOutputDirectory() {
         return spec.outputPath
@@ -55,7 +60,7 @@ class RenderImage extends DefaultTask {
             from temporaryDir
             into getOutputDirectory()
             include "${name}-0001.png"
-            rename { fileName -> getScene() + '.png'}
+            rename { fileName -> getFileName()}
         }
     }
 }

@@ -8,8 +8,10 @@ class RenderSceneSpec {
     File blendFile
     String scene
     File outputPath
+    Closure rename
 
-    public RenderScene() {
+    public RenderSceneSpec() {
+        rename = { s -> s }
     }
 
     def from(File file) {
@@ -22,6 +24,10 @@ class RenderSceneSpec {
 
     def into(File path) {
         outputPath = path
+    }
+
+    def rename(Closure c) {
+        rename = c
     }
 
 }
