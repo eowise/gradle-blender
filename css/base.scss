@@ -1,9 +1,6 @@
 @import "mixins";
 @import "variables";
 @import "foundation";
-@import "compass";
-@import "compass/layout/sticky-footer";
-
 
 html,
 body {
@@ -30,8 +27,6 @@ body {
 	}
 }
 
-@include sticky-footer(100px);
-
 .jumbo {
 	@include grid-row();
 	.heading,
@@ -42,7 +37,6 @@ body {
 }
 
 .blurred {
-	@include background(linear-gradient(top left, rgba(255,255,255,0.5), rgba(255,255,255,0.5)) no-repeat, url(/images/blurred-background.png));
 	background-position: bottom center, center;
 	background-size:100% 10px, auto;
 	padding-top:60px;
