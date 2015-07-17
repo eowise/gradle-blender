@@ -2,6 +2,8 @@ package com.eowise.blender.fbxconv
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.FileCollection
+import org.gradle.api.file.FileTree
+import org.gradle.api.file.FileVisitDetails
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
@@ -16,7 +18,7 @@ class FbxConv extends DefaultTask {
     protected String format
 
     @InputFiles
-    protected FileCollection fbxFiles
+    protected FileTree fbxFiles
 
     @OutputDirectory
     protected File outputDir
@@ -26,6 +28,10 @@ class FbxConv extends DefaultTask {
     }
 
     def convert(FileCollection files) {
+        fbxFiles = files.getAsFileTree()
+    }
+
+    def convert(FileTree files) {
         fbxFiles = files
     }
 
@@ -39,19 +45,22 @@ class FbxConv extends DefaultTask {
 
     @TaskAction
     def run() {
-        fbxFiles.each {
-            File file ->
-                String outputFile = file.name.replaceFirst(~/\.[^\.]+$/, '') + ".${format.toLowerCase()}"
-                project.exec {
-                    commandLine 'fbx-conv'
-                    args '-f', '-o', format, file
+        fbxFiles.visit {
+            FileVisitDetails visitor ->
+                if (!visitor.isDirectory()) {
+                    String outputFile = visitor.getName().replaceFirst(~/\.[^\.]+$/, '') + ".${format.toLowerCase()}"
+                    project.exec {
+                        commandLine 'fbx-conv'
+                        args '-f', '-o', format, visitor.getFile()
+                    }
+                    project.copy {
+                        from visitor.getFile().parentFile
+                        include outputFile
+                        into "${outputDir}/${visitor.getRelativePath().getParent()}"
+                    }
+                    project.delete("${visitor.getFile().parentFile}/${outputFile}")
+
                 }
-                project.copy {
-                    from file.parentFile
-                    include outputFile
-                    into outputDir
-                }
-                project.delete("${file.parentFile}/${outputFile}")
         }
     }
 }
