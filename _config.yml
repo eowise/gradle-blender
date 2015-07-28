@@ -14,3 +14,6 @@ collections:
 markdown: kramdown
 permalink: /blog/:categories/:year/:month/:day/:title
 
+# Sass settings
+sass:
+    sass_dir: _assets
