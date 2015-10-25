@@ -1,3 +1,9 @@
+body {
+  background: #2F363D;
+}
+#root {
+  border: 0;
+}
 #header,
 #description,
 #overview,
@@ -5,10 +11,14 @@
   margin: 0;
 }
 #header {
-  background: #487aae;
+  background: #445569;
+  border-color: #445569;
 }
 #header .ui.large.menu .header.item {
   border-right: none;
+}
+.ui.basic.segment:not(.secondary) {
+  background: white;
 }
 .jumbo .header {
   color: white;
@@ -35,4 +45,5 @@ code {
 }
 .feature p {
   font-size: 1.3em;
+  line-height: 1.5em;
 }

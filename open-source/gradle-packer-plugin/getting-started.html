@@ -16,57 +16,79 @@
 
     
     <body class="index">
-        <div id="root">
-            <div id="header" class="ui inverted basic blue segment">
+        <a name="top"></a>
+        <div id="root" class="ui raised text container segments">
+            <div id="header" class="ui inverted basic segment">
             	<div class="ui large inverted secondary menu">
-            		<div class="ui container">
-            			<a class="header item" href="/">Eowise</a>
+            		<a class="header item" href="/">Eowise</a>
 <div class="right menu">
     
     <a class="item" href="/projects/city-evolution/">City Evolution</a>
     
-    <a class="item" href="/open-source/">Open source</a>
+    <a class="active item" href="/open-source/">Open source</a>
     <a class="item" href="/blog/">Blog</a>
 </div>
 
-            		</div>
                 </div>
             </div>
-            <div id ="description" class="ui very padded inverted basic blue segment">
-                <h1 class="ui inverted header container">gradle-packer-plugin<div class="sub header">A Gradle plugin witch automatically packs textures for a [libgdx](https://libgdx.badlogicgames.com/) gamebla bla bla</div></h1>
-            </div>
-            <div class="ui basic segment">
-                <div class="ui text container">
-                    <div id="content" class="ui basic segment">
-                        <h2 class="ui header">Getting started</h2>
+            <div id ="description" class="ui inverted tertiary green segment">
+                <div class="ui inverted secondary menu">
+                    <span class="header item" href="/">gradle-packer-plugin</span>
+                    <div class="right menu">
                         
+                        <a class="active item" href="/open-source/gradle-packer-plugin/getting-started.html">
+                            <i class="flag icon"></i>
+                            Getting started 
+                        </a>
+                        
+                        <a class="item" href="/open-source/gradle-packer-plugin/reference.html">
+                            <i class="book icon"></i>
+                            Reference 
+                        </a>
+                        
+                        <a class="item" href="/open-source/gradle-packer-plugin/examples.html">
+                            <i class="lab icon"></i>
+                            Examples 
+                        </a>
+                        
+                        
+                        <a class="item" href="https://github.com/eowise/gradle-packer-plugin" target="_blank">
+                            <i class="github icon"></i>
+                            Github
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div id="content" class="ui basic segment">
+                
 <a name="introduction"></a>
-<h3><span class="ui huge green ribbon label">Introduction</span></h3>
+<h1 class="ui green dividing header">Introduction</h1>
 <p>A Gradle plugin witch automatically packs texture for a libgdx game, using libgdx texture packer. Before packing, the plugin can do some actions on the resources provided, such as:</p>
 <ul>
     <li>Resize images for variants</li>
     <li>Convert SVG to PNG images</li>
 </ul>
 <a name="install"></a>
-<h3><span class="ui huge green ribbon label">Install</span></h3>
+<h1 class="ui green dividing header">Install</h3>
 <p>To apply the plugin, please add one of the following snippets to your build.gradle file:</p>
 
-<div class="ui tall inverted stacked grey segment">
-    <div class="ui top attached label">
-        <span class="violet right aligned detail"><div class="ui compact tiny violet label">Gradle >= 2.1</div></span>
-        build.gradle
+<div class="ui stacked segments">
+    <div class="ui thin basic secondary inverted grey segment">
+        <div class="ui secondary inverted tabs menu">
+            <span class="header item">build.gradle</span>
+            <a class="active item" data-tab="after">Gradle &ge; 2.1</a>
+            <a class="item" data-tab="before">Gradle < 2.1</a>
+        </div>
     </div>
-    <div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
+    <div class="ui inverted grey segment">
+        <div class="ui active tab" data-tab="after">
+<div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
     <span class="n">id</span> <span class="s2">&quot;com.eowise.packer&quot;</span> <span class="n">version</span> <span class="s2">&quot;0.7.0&quot;</span>
 <span class="o">}</span></code></pre></div>
-</div>
-<div class="ui horizontal divider">Or</div>
-<div class="ui tall inverted stacked grey segment">
-    <div class="ui top attached label">
-        <span class="violet right aligned detail"><div class="ui compact tiny violet label">Gradle < 2.1</div></span>
-        build.gradle
-    </div>
-    <div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">buildscript</span> <span class="o">{</span>
+        </div>
+        <div class="ui tab" data-tab="before">
+<div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">buildscript</span> <span class="o">{</span>
     <span class="n">repositories</span> <span class="o">{</span>
         <span class="n">jcenter</span><span class="o">()</span>
     <span class="o">}</span>
@@ -75,11 +97,13 @@
     <span class="o">}</span>
 <span class="o">}</span>
 <span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;packer&#39;</span></code></pre></div>
+        </div>
+    </div>
 </div>
 <a name="basic-usage"></a>
-<h3><span class="ui huge green ribbon label">Basic usage</span></h3>
+<h1 class="ui green dividing header">Basic usage</h3>
 <p>A very basic scenario :</p>
-<div class="ui tall inverted stacked grey segment">
+<div class="ui inverted stacked grey segment">
     <div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">packs</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">packer</span><span class="o">.</span><span class="na">Packer</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">resourcesInputPath</span> <span class="s1">&#39;path/to/resources&#39;</span>
   <span class="n">atlasesOutputPath</span> <span class="s1">&#39;path/to/atlases&#39;</span>
@@ -92,43 +116,43 @@
     <li>Copy all file named 'pack.json' from the resouces path to the working directory</li>
     <li>Call the libgdx texture packer to packs the textures from the working directory into the 'path/to/atlases' directory (generally android assets directory)</li>
 </ol>
-
-                        <div class="ui right close dividing rail">
-                            <div class="ui secondary sticky vertical menu">
-                                
-                                <a class="item" href="/open-source/gradle-packer-plugin/getting-started.html">Getting started</a>
-                                <div class="menu">
-                                    
-                                    <a class="item" href="#introduction">Introduction</a>
-                                    
-                                    <a class="item" href="#install">Install</a>
-                                    
-                                    <a class="item" href="#basic-usage">Basic usage</a>
-                                    
-                                </div>
-                                
-                                <a class="item" href="/open-source/gradle-packer-plugin/reference.html">Reference</a>
-                                <div class="menu">
-                                    
-                                    <a class="item" href="#task">Task</a>
-                                    
-                                    <a class="item" href="#methods">Methods</a>
-                                    
-                                </div>
-                                
-                                <a class="item" href="/open-source/gradle-packer-plugin/examples.html">Examples</a>
-                                <div class="menu">
-                                    
-                                    <a class="item" href="#introduction">Introduction</a>
-                                    
-                                    <a class="item" href="#install">Install</a>
-                                    
-                                    <a class="item" href="#basic-usage">Basic usage</a>
-                                    
-                                </div>
-                                
-                            </div>
+<script type="text/javascript">
+    $('.tabs .item').tab();
+</script>
+                <div class="ui right close dividing rail">
+                    <div class="ui secondary sticky vertical inverted menu">
+                        
+                        <a class="item" href="/open-source/gradle-packer-plugin/getting-started.html">Getting started</a>
+                        <div class="menu">
+                            
+                            <a class="item" href="#introduction">Introduction</a>
+                            
+                            <a class="item" href="#install">Install</a>
+                            
+                            <a class="item" href="#basic-usage">Basic usage</a>
+                            
                         </div>
+                        
+                        <a class="item" href="/open-source/gradle-packer-plugin/reference.html">Reference</a>
+                        <div class="menu">
+                            
+                            <a class="item" href="#task">Task</a>
+                            
+                            <a class="item" href="#methods">Methods</a>
+                            
+                        </div>
+                        
+                        <a class="item" href="/open-source/gradle-packer-plugin/examples.html">Examples</a>
+                        <div class="menu">
+                            
+                            <a class="item" href="#introduction">Introduction</a>
+                            
+                            <a class="item" href="#install">Install</a>
+                            
+                            <a class="item" href="#basic-usage">Basic usage</a>
+                            
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -151,6 +175,9 @@
 </script>
         <script type="text/javascript">
             jQuery('.ui.sticky').sticky({context: '#content'});
+            jQuery('.overlay').visibility({
+                type   : 'fixed',
+            });
         </script>
     </body>
 </html>

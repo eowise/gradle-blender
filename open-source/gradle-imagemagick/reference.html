@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+
+
+<html>
+        <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='content-type'>
+        <meta charset='utf-8'>
+        <title>Reference - eowise</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
+        <link href="/dist/semantic/semantic.css" rel="stylesheet" type="text/css">
+        <link href="/css/base.css" rel="stylesheet" type="text/css">
+        <script src="/dist/jquery/jquery.custom.js"></script>
+        <script src="/dist/semantic/semantic.js"></script>
+    </head>
+
+    
+    <body class="index">
+        <a name="top"></a>
+        <div id="root" class="ui raised text container segments">
+            <div id="header" class="ui inverted basic segment">
+            	<div class="ui large inverted secondary menu">
+            		<a class="header item" href="/">Eowise</a>
+<div class="right menu">
+    
+    <a class="item" href="/projects/city-evolution/">City Evolution</a>
+    
+    <a class="active item" href="/open-source/">Open source</a>
+    <a class="item" href="/blog/">Blog</a>
+</div>
+
+                </div>
+            </div>
+            <div id ="description" class="ui inverted tertiary violet segment">
+                <div class="ui inverted secondary menu">
+                    <span class="header item" href="/">gradle-imagemagick</span>
+                    <div class="right menu">
+                        
+                        <a class="item" href="/open-source/gradle-imagemagick/getting-started.html">
+                            <i class="flag icon"></i>
+                            Getting started 
+                        </a>
+                        
+                        <a class="active item" href="/open-source/gradle-imagemagick/reference.html">
+                            <i class="book icon"></i>
+                            Reference 
+                        </a>
+                        
+                        <a class="item" href="/open-source/gradle-imagemagick/use-cases.html">
+                            <i class="idea icon"></i>
+                            Use cases 
+                        </a>
+                        
+                        
+                        <a class="item" href="https://github.com/eowise/gradle-imagemagick" target="_blank">
+                            <i class="github icon"></i>
+                            Github
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div id="content" class="ui basic segment">
+                
+<a name="magick-task"></a>
+<h1 class="ui violet dividing header">Magick task</h1>
+<p>This task wrap the <a href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a> command line executable. To use the Magick task, you must provide a set of files to process with the <code class="compact">convert()</code> method, and a sequence of actions applied to theses files with the <code class="compact">actions()</code> method. You can also provide an output directory for processed files witch can be renamed on the fly. </p>
+<div class="ui inverted stacked grey segment">
+    <div class="ui top attached label">Exemple of Magick task witch divide all image by 2</div>
+<div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">resize</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">imagemagick</span><span class="o">.</span><span class="na">tasks</span><span class="o">.</span><span class="na">Magick</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">convert</span> <span class="s1">&#39;images&#39;</span><span class="o">,</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">&#39;*.png&#39;</span> <span class="o">}</span>
+    <span class="n">into</span> <span class="s1">&#39;outputDir&#39;</span>
+    <span class="n">actions</span> <span class="o">{</span>
+        <span class="o">-</span><span class="n">background</span><span class="o">(</span><span class="s1">&#39;none&#39;</span><span class="o">)</span>
+        <span class="n">inputFile</span><span class="o">()</span>
+        <span class="o">-</span><span class="n">resize</span><span class="o">(</span><span class="s1">&#39;50%&#39;</span><span class="o">)</span>
+        <span class="n">outputFile</span><span class="o">()</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
+</div>
+<div class="ui info icon message">
+    <i class="info icon"></i>
+    <div class="content">
+        <p>If there is only one file <code>test.png</code> in the <code>images</code> folder, the example above will call only one <code>convert</code> command line:</p>
+        <p class="ui basic large blue label"><code>convert -background none images/test.png -resize 50% outputDir/test.png</code></p>
+    </div>
+</div>
+<h2 class="ui dividing header">Methods</h2>
+<h3 class="ui header"><code class="compact">convert(String basePath, PatternFilterable pattern)</code></h3>
+<p><code class="compact">convert</code> is used to specify the input files processed by the task. It works like <a href="https://docs.gradle.org/current/userguide/working_with_files.html#sec:file_trees">Gradle file trees</a>: you select a base path, and you can then include or exclude files in sub folders.</p>
+<table class="ui small compact celled table">
+    <thead>
+        <tr>
+            <th>Parameter</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>basePath</td>
+            <td>This is the base path where are input files.</td>
+        </tr>
+        <tr>
+            <td>pattern</td>
+            <td>A <a href="https://www.gradle.org/docs/current/javadoc/org/gradle/api/tasks/util/PatternFilterable.html">PatternFilterable</a> used to select input files.</td>
+        </tr>
+    </tbody>
+</table>
+<h3 class="ui header"><code class="compact">into(String path)</code></h3>
+<p>Set the output path of the processed files.</p>
+<h3 class="ui header"><code class="compact">into(Closure path)</code></h3>
+<p>You can also set the processed files output path dynamically with a closure. The closure take the relative path to the current file as argument, starting from the base path.</p>
+<div class="ui positive icon message">
+    <i class="lab icon"></i>
+    <div class="content">See an <a href="use-cases.html">example</a>.</div>
+</div>
+<h3 class="ui header"><code class="compact">actions(Closure actions)</code></h3>
+<p>Each method call (and all method arguments) in the <code class="compact">actions</code> closure is converted to a string and added to the <a href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a> command line. If present, the minus or plus in front of the method name will also be reported.</p>
+<div class="ui positive icon message">
+    <i class="lab icon"></i>
+    <div class="content">
+        <p>For example, <code class="compact">-background('none')</code> will be converted to <code class="compact">-background none</code>.</p>
+        <p>See an <a href="use-cases.html">example</a>.</p>
+        </div>
+</div>
+
+<h2 class="ui dividing header">Actions closure in detail</h2>
+<div class="ui fluid styled accordion">
+    <div class="title">
+        <i class="dropdown icon"></i>
+        <code class="compact">inputFile()</code>
+    </div>
+    <div class="content">
+        <p>Convert to xc:color</p>
+    </div>
+    <div class="title">
+        <i class="dropdown icon"></i>
+        <code class="compact">outputFile()</code>
+    </div>
+    <div class="content">
+        <p>Convert to xc:color</p>
+    </div>
+    <div class="title">
+        <i class="dropdown icon"></i>
+        <code class="compact">outputFile(Closure rename)</code>
+    </div>
+    <div class="content">
+        <p>Convert to xc:color</p>
+    </div>
+    <div class="title">
+        <i class="dropdown icon"></i>
+        <code class="compact">file(File file)</code>
+    </div>
+    <div class="content">
+        <p>Convert to xc:color</p>
+    </div>
+    <div class="title">
+        <i class="dropdown icon"></i>
+        <code class="compact">file(Closure path, Closure rename)</code>
+    </div>
+    <div class="content">
+        
+    </div>
+    <div class="title">
+        <i class="dropdown icon"></i>
+        <code class="compact">xc(String color)</code>
+    </div>
+    <div class="content">
+        <p>Convert to xc:color</p>
+    </div>
+    <div class="title">
+        <i class="dropdown icon"></i>
+        <code class="compact">stack(Closure actions)</code>
+    </div>
+    <div class="content">
+        <p>The enclosed <code class="compact">actions</code> are included in a <a href="http://www.imagemagick.org/script/command-line-processing.php#stack">stack</a>.</p>
+    </div>
+    <div class="title">
+        <i class="dropdown icon"></i>
+        <code class="compact">condition(PatternFilterable pattern, Closure closure)</code>
+    </div>
+    <div class="content">
+        <p>This is the base path where are input files.</p>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery('.ui.accordion').accordion({exclusive: false});
+</script>
+                <div class="ui right close dividing rail">
+                    <div class="ui secondary sticky vertical inverted menu">
+                        
+                        <a class="item" href="/open-source/gradle-imagemagick/getting-started.html">Getting started</a>
+                        <div class="menu">
+                            
+                            <a class="item" href="#introduction">Introduction</a>
+                            
+                            <a class="item" href="#install">Install</a>
+                            
+                            <a class="item" href="#basic-usage">Basic usage</a>
+                            
+                        </div>
+                        
+                        <a class="item" href="/open-source/gradle-imagemagick/reference.html">Reference</a>
+                        <div class="menu">
+                            
+                            <a class="item" href="#magick-task">Magick task</a>
+                            
+                            <a class="item" href="#basic-usage">Basic usage</a>
+                            
+                        </div>
+                        
+                        <a class="item" href="/open-source/gradle-imagemagick/use-cases.html">Use cases</a>
+                        <div class="menu">
+                            
+                            <a class="item" href="#resize">Resize</a>
+                            
+                            <a class="item" href="#add-nine-patches">Add nine patches</a>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+	<p class="fixie"></p>
+</div>
+<script type="text/javascript">
+    
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36528878-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    
+</script>
+        <script type="text/javascript">
+            jQuery('.ui.sticky').sticky({context: '#content'});
+            jQuery('.overlay').visibility({
+                type   : 'fixed',
+            });
+        </script>
+    </body>
+</html>
