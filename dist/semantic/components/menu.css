@@ -1981,3 +1981,9 @@ Floated Menu / Item
          Site Overrides
 *******************************/
 
+.ui.thin.menu {
+  min-height: auto;
+}
+.ui.thin.menu .item {
+  padding: 0.35714286em 0.46428571em;
+}

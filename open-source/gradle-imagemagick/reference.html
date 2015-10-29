@@ -14,7 +14,6 @@
         <script src="/dist/semantic/semantic.js"></script>
     </head>
 
-    
     <body class="index">
         <a name="top"></a>
         <div id="root" class="ui raised text container segments">
@@ -65,8 +64,13 @@
 <a name="magick-task"></a>
 <h1 class="ui violet dividing header">Magick task</h1>
 <p>This task wrap the <a href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a> command line executable. To use the Magick task, you must provide a set of files to process with the <code class="compact">convert()</code> method, and a sequence of actions applied to theses files with the <code class="compact">actions()</code> method. You can also provide an output directory for processed files witch can be renamed on the fly. </p>
-<div class="ui inverted stacked grey segment">
-    <div class="ui top attached label">Exemple of Magick task witch divide all image by 2</div>
+<div class="ui stacked segments">
+    <div class="ui thin basic secondary inverted grey segment">
+        <div class="ui thin secondary inverted tabs menu">
+            <span class="header item">Exemple of Magick task witch divide all image by 2</span>
+        </div>
+    </div>
+    <div class="ui inverted stacked grey segment">
 <div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">resize</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">imagemagick</span><span class="o">.</span><span class="na">tasks</span><span class="o">.</span><span class="na">Magick</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">convert</span> <span class="s1">&#39;images&#39;</span><span class="o">,</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">&#39;*.png&#39;</span> <span class="o">}</span>
     <span class="n">into</span> <span class="s1">&#39;outputDir&#39;</span>
@@ -77,6 +81,7 @@
         <span class="n">outputFile</span><span class="o">()</span>
     <span class="o">}</span>
 <span class="o">}</span></code></pre></div>
+    </div>
 </div>
 <div class="ui info icon message">
     <i class="info icon"></i>
