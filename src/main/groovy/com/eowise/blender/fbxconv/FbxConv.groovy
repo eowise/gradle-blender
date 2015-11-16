@@ -8,6 +8,7 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.incremental.IncrementalTaskInputs
 
 /**
  * Created by aurel on 23/01/14.
@@ -15,13 +16,13 @@ import org.gradle.api.tasks.TaskAction
 class FbxConv extends DefaultTask {
 
     @Input
-    protected String format
+    def String format
 
     @InputFiles
-    protected FileTree fbxFiles
+    def FileTree fbxFiles
 
     @OutputDirectory
-    protected File outputDir
+    def File outputDir
 
     def FbxConv() {
         format = 'G3DB'
@@ -44,22 +45,40 @@ class FbxConv extends DefaultTask {
     }
 
     @TaskAction
-    def run() {
+    void run(IncrementalTaskInputs incrementalInputs) {
+        FileCollection changedFiles = project.files()
+        FileCollection removedFiles = project.files()
+
+        incrementalInputs.outOfDate {
+            change ->
+                changedFiles.from(change.file)
+        }
+
+        incrementalInputs.removed {
+            remove ->
+                removedFiles.from(remove.file)
+        }
+
+
         fbxFiles.visit {
             FileVisitDetails visitor ->
-                if (!visitor.isDirectory()) {
-                    String outputFile = visitor.getName().replaceFirst(~/\.[^\.]+$/, '') + ".${format.toLowerCase()}"
-                    project.exec {
-                        commandLine 'fbx-conv'
-                        args '-f', '-o', format, visitor.getFile()
+                if (changedFiles.contains(visitor.getFile())) {
+                    if (!visitor.isDirectory()) {
+                        String outputFile = visitor.getName().replaceFirst(~/\.[^\.]+$/, '') + ".${format.toLowerCase()}"
+                        project.exec {
+                            commandLine 'fbx-conv'
+                            args '-f', '-o', format, visitor.getFile()
+                        }
+                        project.copy {
+                            from visitor.getFile().parentFile
+                            include outputFile
+                            into "${outputDir}/${visitor.getRelativePath().getParent()}"
+                        }
+                        project.delete("${visitor.getFile().parentFile}/${outputFile}")
                     }
-                    project.copy {
-                        from visitor.getFile().parentFile
-                        include outputFile
-                        into "${outputDir}/${visitor.getRelativePath().getParent()}"
+                    else if (removedFiles.contains(visitor.getFile())) {
+                        project.delete("${path}/${visitor.getPath()}")
                     }
-                    project.delete("${visitor.getFile().parentFile}/${outputFile}")
-
                 }
         }
     }
