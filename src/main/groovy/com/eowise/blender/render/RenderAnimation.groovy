@@ -1,7 +1,6 @@
 package com.eowise.blender.render
 
 import com.eowise.blender.render.specs.RenderAnimationSpec
-import com.eowise.blender.render.specs.RenderSceneSpec
 import org.gradle.api.DefaultTask
 import org.gradle.api.Task
 import org.gradle.api.tasks.Input
