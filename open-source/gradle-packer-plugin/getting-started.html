@@ -22,7 +22,7 @@
             		<a class="header item" href="/">Eowise</a>
 <div class="right menu">
     
-    <a class="item" href="/projects/city-evolution/">City Evolution</a>
+    <a class="item" href="/projects/city-evolution/"></a>
     
     <a class="active item" href="/open-source/">Open source</a>
     <a class="item" href="/blog/">Blog</a>
@@ -82,20 +82,20 @@
     </div>
     <div class="ui inverted grey segment">
         <div class="ui active tab" data-tab="after">
-<div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
-    <span class="n">id</span> <span class="s2">&quot;com.eowise.packer&quot;</span> <span class="n">version</span> <span class="s2">&quot;0.7.0&quot;</span>
-<span class="o">}</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
+    <span class="n">id</span> <span class="s2">"com.eowise.packer"</span> <span class="n">version</span> <span class="s2">"0.7.0"</span>
+<span class="o">}</span></code></pre></figure>
         </div>
         <div class="ui tab" data-tab="before">
-<div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">buildscript</span> <span class="o">{</span>
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">buildscript</span> <span class="o">{</span>
     <span class="n">repositories</span> <span class="o">{</span>
         <span class="n">jcenter</span><span class="o">()</span>
     <span class="o">}</span>
     <span class="n">dependencies</span> <span class="o">{</span>
-        <span class="n">classpath</span> <span class="s1">&#39;com.eowise:packer:0.7.0&#39;</span>
+        <span class="n">classpath</span> <span class="s1">'com.eowise:packer:0.7.0'</span>
     <span class="o">}</span>
 <span class="o">}</span>
-<span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;packer&#39;</span></code></pre></div>
+<span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">'packer'</span></code></pre></figure>
         </div>
     </div>
 </div>
@@ -103,10 +103,11 @@
 <h1 class="ui green dividing header">Basic usage</h3>
 <p>A very basic scenario :</p>
 <div class="ui inverted stacked grey segment">
-    <div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">packs</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">packer</span><span class="o">.</span><span class="na">Packer</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">resourcesInputPath</span> <span class="s1">&#39;path/to/resources&#39;</span>
-  <span class="n">atlasesOutputPath</span> <span class="s1">&#39;path/to/atlases&#39;</span>
-<span class="o">}</span></code></pre></div>
+    <figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">packs</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">packer</span><span class="o">.</span><span class="na">Packer</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">resourcesInputPath</span> <span class="s1">'path/to/resources'</span>
+  <span class="n">atlasesOutputPath</span> <span class="s1">'path/to/atlases'</span>
+<span class="o">}</span>
+    </code></pre></figure>
 </div>
 <p>This task will do the folowing actions :</p>
 <ol>

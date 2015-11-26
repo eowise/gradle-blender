@@ -22,7 +22,7 @@
             		<a class="header item" href="/">Eowise</a>
 <div class="right menu">
     
-    <a class="item" href="/projects/city-evolution/">City Evolution</a>
+    <a class="item" href="/projects/city-evolution/"></a>
     
     <a class="active item" href="/open-source/">Open source</a>
     <a class="item" href="/blog/">Blog</a>
@@ -65,18 +65,18 @@
 <h1 class="ui violet dividing header">Resize images</h1>
 <p>Let's say you want to divide by 2 all PNG files in the <span class="ui basic compact label"><i class="grey folder outline icon"></i>images</span> folder and all subfolders to a <span class="ui basic compact label"><i class="grey folder outline icon"></i>resized</span> folder relative to each source image. In addition to that, you want to suffix all resized files with <q>-small</q>. Easy:</p>
 <div class="ui inverted stacked grey segment">
-<div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">resize</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">imagemagick</span><span class="o">.</span><span class="na">tasks</span><span class="o">.</span><span class="na">Magick</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">convert</span> <span class="s1">&#39;images&#39;</span><span class="o">,</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">&#39;**/*.png&#39;</span> <span class="o">}</span>
-    <span class="n">into</span> <span class="o">{</span> <span class="n">relativeDir</span> <span class="o">-&gt;</span> <span class="s2">&quot;images/${relativeDir}/resized&quot;</span> <span class="o">}</span>
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">resize</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">imagemagick</span><span class="o">.</span><span class="na">tasks</span><span class="o">.</span><span class="na">Magick</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">convert</span> <span class="s1">'images'</span><span class="o">,</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">'**/*.png'</span> <span class="o">}</span>
+    <span class="n">into</span> <span class="o">{</span> <span class="n">relativeDir</span> <span class="o">-&gt;</span> <span class="s2">"images/${relativeDir}/resized"</span> <span class="o">}</span>
     <span class="n">actions</span> <span class="o">{</span>
-        <span class="o">-</span><span class="n">background</span><span class="o">(</span><span class="s1">&#39;none&#39;</span><span class="o">)</span>
+        <span class="o">-</span><span class="n">background</span><span class="o">(</span><span class="s1">'none'</span><span class="o">)</span>
         <span class="n">inputFile</span><span class="o">()</span>
-        <span class="o">-</span><span class="n">resize</span><span class="o">(</span><span class="s1">&#39;50%&#39;</span><span class="o">)</span>
+        <span class="o">-</span><span class="n">resize</span><span class="o">(</span><span class="s1">'50%'</span><span class="o">)</span>
         <span class="n">outputFile</span> <span class="o">{</span>
-            <span class="n">filename</span><span class="o">,</span> <span class="n">extension</span> <span class="o">-&gt;</span> <span class="s2">&quot;${filename}-small.${extension}&quot;</span>
+            <span class="n">filename</span><span class="o">,</span> <span class="n">extension</span> <span class="o">-&gt;</span> <span class="s2">"${filename}-small.${extension}"</span>
         <span class="o">}</span>
     <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
+<span class="o">}</span></code></pre></figure>
 </div>
 <p>As you can see below, each image will be resized in a <q>resized</q> folder relative to the source path. Moreover, each resized file is renamed.</p>
 <div class="ui fluid steps">

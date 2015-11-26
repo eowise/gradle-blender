@@ -22,7 +22,7 @@
             		<a class="header item" href="/">Eowise</a>
 <div class="right menu">
     
-    <a class="item" href="/projects/city-evolution/">City Evolution</a>
+    <a class="item" href="/projects/city-evolution/"></a>
     
     <a class="active item" href="/open-source/">Open source</a>
     <a class="item" href="/blog/">Blog</a>
@@ -61,7 +61,60 @@
             </div>
             <div id="content" class="ui basic segment">
                 
-Hello!
+<h1 class="ui violet dividing header">Introduction</h1>
+<p>A Gradle plugin witch automatically packs texture for a libgdx game, using libgdx texture packer. Before packing, the plugin can do some actions on the resources provided, such as:</p>
+<ul>
+    <li>Resize images for variants</li>
+    <li>Convert SVG to PNG images</li>
+</ul>
+<h1 class="ui violet dividing header">Install</h3>
+<p>To apply the plugin, please add one of the following snippets to your build.gradle file:</p>
+
+<div class="ui stacked segments">
+    <div class="ui thin basic secondary inverted grey segment">
+        <div class="ui thin secondary inverted tabs menu">
+            <span class="header item">build.gradle</span>
+            <a class="active item" data-tab="after">Gradle &ge; 2.1</a>
+            <a class="item" data-tab="before">Gradle < 2.1</a>
+        </div>
+    </div>
+    <div class="ui inverted grey segment">
+        <div class="ui active tab" data-tab="after">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
+    <span class="n">id</span> <span class="s2">"com.eowise.gradle-imagemagick"</span> <span class="n">version</span> <span class="s2">"0.5.0"</span>
+<span class="o">}</span></code></pre></figure>
+        </div>
+        <div class="ui tab" data-tab="before">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">buildscript</span> <span class="o">{</span>
+    <span class="n">repositories</span> <span class="o">{</span>
+        <span class="n">jcenter</span><span class="o">()</span>
+    <span class="o">}</span>
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="n">classpath</span> <span class="s1">'com.eowise:gradle-imagemagick:0.5.0'</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+        </div>
+    </div>
+</div>
+<h1 class="ui violet dividing header">Basic usage</h3>
+<p>A very basic scenario :</p>
+<div class="ui inverted stacked grey segment">
+    <figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">packs</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">packer</span><span class="o">.</span><span class="na">Packer</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">resourcesInputPath</span> <span class="s1">'path/to/resources'</span>
+  <span class="n">atlasesOutputPath</span> <span class="s1">'path/to/atlases'</span>
+<span class="o">}</span>
+    </code></pre></figure>
+</div>
+<p>This task will do the folowing actions :</p>
+<ol>
+    <li>Convert all SVGs to PNGs in the 'path/to/resources' tree</li>
+    <li>Copy all PNGs to a working directory</li>
+    <li>Copy all file named 'pack.json' from the resouces path to the working directory</li>
+    <li>Call the libgdx texture packer to packs the textures from the working directory into the 'path/to/atlases' directory (generally android assets directory)</li>
+</ol>
+<script type="text/javascript">
+    $('.tabs .item').tab();
+</script>
                 <div class="ui right close dividing rail">
                     <div class="ui secondary sticky vertical inverted menu">
                         

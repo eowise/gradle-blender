@@ -22,7 +22,7 @@
             		<a class="header item" href="/">Eowise</a>
 <div class="right menu">
     
-    <a class="item" href="/projects/city-evolution/">City Evolution</a>
+    <a class="item" href="/projects/city-evolution/"></a>
     
     <a class="active item" href="/open-source/">Open source</a>
     <a class="item" href="/blog/">Blog</a>
@@ -40,6 +40,11 @@
                             Getting started 
                         </a>
                         
+                        <a class="item" href="/open-source/gradle-blender/reference.html">
+                            <i class="book icon"></i>
+                            Reference 
+                        </a>
+                        
                         
                         <a class="item" href="https://github.com/eowise/gradle-blender" target="_blank">
                             <i class="github icon"></i>
@@ -52,7 +57,65 @@
             <div id="content" class="ui basic segment">
                 
 <h1 class="ui orange dividing header">Introduction</h1>
-<p>Hello!</p>
+<p>A Gradle plugin witch automatically packs texture for a libgdx game, using libgdx texture packer. Before packing, the plugin can do some actions on the resources provided, such as:</p>
+<ul>
+    <li>Resize images for variants</li>
+    <li>Convert SVG to PNG images</li>
+</ul>
+<h1 class="ui orange dividing header">Install</h3>
+<p>To apply the plugin, please add one of the following snippets to your build.gradle file:</p>
+
+<div class="ui stacked segments">
+    <div class="ui thin basic secondary inverted grey segment">
+        <div class="ui thin secondary inverted tabs menu">
+            <span class="header item">build.gradle</span>
+            <a class="active item" data-tab="after">Gradle &ge; 2.1</a>
+            <a class="item" data-tab="before">Gradle < 2.1</a>
+        </div>
+    </div>
+    <div class="ui inverted grey segment">
+        <div class="ui active tab" data-tab="after">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">plugins</span> <span class="o">{</span>
+    <span class="n">id</span> <span class="s1">'com.eowise.gradle-blender'</span> <span class="n">version</span> <span class="s1">'0.3.0'</span>
+<span class="o">}</span></code></pre></figure>
+        </div>
+        <div class="ui tab" data-tab="before">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">buildscript</span> <span class="o">{</span>
+    <span class="n">repositories</span> <span class="o">{</span>
+        <span class="n">jcenter</span><span class="o">()</span>
+    <span class="o">}</span>
+    <span class="n">dependencies</span> <span class="o">{</span>
+        <span class="n">classpath</span> <span class="s1">'com.eowise:gradle-blender:0.3.0'</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+        </div>
+    </div>
+</div>
+<h1 class="ui orange dividing header">Getting started</h3>
+<p>This project is compound of three Gradle tasks classes. Depending of your need, create a task of the corresponding type:</p>
+<div class="ui bulleted list">
+    <div class="item">
+        <div class="content">
+            <a href="reference.html#fbx-conv" class="header">com.eowise.blender.fbxconv.FbxConv</a>
+            <div class="description">Convert FBX files to G3DJ or G3DB.</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="content">
+            <a href="reference.html#render-image" class="header">com.eowise.blender.render.RenderImage</a>
+            <div class="description">Render a Blender scene.</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="content">
+            <a href="reference.html#render-animation" class="header">com.eowise.blender.render.RenderAnimation</a>
+            <div class="description">Render a Blender animation.</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.tabs .item').tab();
+</script>
                 <div class="ui right close dividing rail">
                     <div class="ui secondary sticky vertical inverted menu">
                         
@@ -64,6 +127,15 @@
                             <a class="item" href="#install">Install</a>
                             
                             <a class="item" href="#next-step">Next step</a>
+                            
+                        </div>
+                        
+                        <a class="item" href="/open-source/gradle-blender/reference.html">Reference</a>
+                        <div class="menu">
+                            
+                            <a class="item" href="#magick-task">Magick task</a>
+                            
+                            <a class="item" href="#basic-usage">Basic usage</a>
                             
                         </div>
                         

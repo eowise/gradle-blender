@@ -22,7 +22,7 @@
             		<a class="header item" href="/">Eowise</a>
 <div class="right menu">
     
-    <a class="item" href="/projects/city-evolution/">City Evolution</a>
+    <a class="item" href="/projects/city-evolution/"></a>
     
     <a class="active item" href="/open-source/">Open source</a>
     <a class="item" href="/blog/">Blog</a>
@@ -71,16 +71,16 @@
         </div>
     </div>
     <div class="ui inverted stacked grey segment">
-<div class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">resize</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">imagemagick</span><span class="o">.</span><span class="na">tasks</span><span class="o">.</span><span class="na">Magick</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">convert</span> <span class="s1">&#39;images&#39;</span><span class="o">,</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">&#39;*.png&#39;</span> <span class="o">}</span>
-    <span class="n">into</span> <span class="s1">&#39;outputDir&#39;</span>
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">resize</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">imagemagick</span><span class="o">.</span><span class="na">tasks</span><span class="o">.</span><span class="na">Magick</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">convert</span> <span class="s1">'images'</span><span class="o">,</span> <span class="o">{</span> <span class="n">include</span> <span class="s1">'*.png'</span> <span class="o">}</span>
+    <span class="n">into</span> <span class="s1">'outputDir'</span>
     <span class="n">actions</span> <span class="o">{</span>
-        <span class="o">-</span><span class="n">background</span><span class="o">(</span><span class="s1">&#39;none&#39;</span><span class="o">)</span>
+        <span class="o">-</span><span class="n">background</span><span class="o">(</span><span class="s1">'none'</span><span class="o">)</span>
         <span class="n">inputFile</span><span class="o">()</span>
-        <span class="o">-</span><span class="n">resize</span><span class="o">(</span><span class="s1">&#39;50%&#39;</span><span class="o">)</span>
+        <span class="o">-</span><span class="n">resize</span><span class="o">(</span><span class="s1">'50%'</span><span class="o">)</span>
         <span class="n">outputFile</span><span class="o">()</span>
     <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
+<span class="o">}</span></code></pre></figure>
     </div>
 </div>
 <div class="ui info icon message">
@@ -91,7 +91,10 @@
     </div>
 </div>
 <h2 class="ui dividing header">Methods</h2>
-<h3 class="ui header"><code class="compact">convert(String basePath, PatternFilterable pattern)</code></h3>
+<h3 class="ui small header">
+    <code class="compact">convert(String basePath, PatternFilterable pattern)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
 <p><code class="compact">convert</code> is used to specify the input files processed by the task. It works like <a href="https://docs.gradle.org/current/userguide/working_with_files.html#sec:file_trees">Gradle file trees</a>: you select a base path, and you can then include or exclude files in sub folders.</p>
 <table class="ui small compact celled table">
     <thead>
@@ -111,15 +114,22 @@
         </tr>
     </tbody>
 </table>
-<h3 class="ui header"><code class="compact">into(String path)</code></h3>
+<h3 class="ui small header">
+    <code class="compact">into(String path)</code>
+    <span class="sub header">or</span>
+    <code class="compact">into(Closure path)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
 <p>Set the output path of the processed files.</p>
-<h3 class="ui header"><code class="compact">into(Closure path)</code></h3>
 <p>You can also set the processed files output path dynamically with a closure. The closure take the relative path to the current file as argument, starting from the base path.</p>
 <div class="ui positive icon message">
     <i class="lab icon"></i>
     <div class="content">See an <a href="use-cases.html">example</a>.</div>
 </div>
-<h3 class="ui header"><code class="compact">actions(Closure actions)</code></h3>
+<h3 class="ui small header">
+    <code class="compact">actions(Closure actions)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
 <p>Each method call (and all method arguments) in the <code class="compact">actions</code> closure is converted to a string and added to the <a href="http://www.imagemagick.org/script/convert.php">ImageMagick convert</a> command line. If present, the minus or plus in front of the method name will also be reported.</p>
 <div class="ui positive icon message">
     <i class="lab icon"></i>
@@ -141,13 +151,9 @@
     <div class="title">
         <i class="dropdown icon"></i>
         <code class="compact">outputFile()</code>
-    </div>
-    <div class="content">
-        <p>Convert to xc:color</p>
-    </div>
-    <div class="title">
-        <i class="dropdown icon"></i>
+        <span>or</span>
         <code class="compact">outputFile(Closure rename)</code>
+        <div class="ui horizontal basic red left pointing label">required</div>
     </div>
     <div class="content">
         <p>Convert to xc:color</p>
