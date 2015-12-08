@@ -10,7 +10,6 @@ import spock.lang.Specification
 class RenderImageTest extends Specification {
 
     void "render an image"() {
-
         when:
         GradleRunner.create()
                 .withProjectDir(new File(""))

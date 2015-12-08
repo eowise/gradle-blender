@@ -4,3 +4,4 @@ build/
 gradle.properties
 fbx-conv.iml
 src/test/resources/**/*.png
+src/test/resources/**/*.g3d*

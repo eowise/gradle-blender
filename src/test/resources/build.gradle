@@ -9,6 +9,12 @@ buildscript {
 
 task testRenderImage(type: com.eowise.blender.render.RenderImage) {
     scene "Scene"
-    from file("cube.blend")
-    into file("cube.png")
+    from "cube.blend"
+    into "cube.png"
+}
+
+task testFbxConv(type: com.eowise.blender.fbxconv.FbxConv) {
+    convert files("cube.fbx")
+    into "./"
+    g3dj()
 }
