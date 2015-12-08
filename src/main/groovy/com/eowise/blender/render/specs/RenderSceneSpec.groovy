@@ -1,33 +1,34 @@
 package com.eowise.blender.render.specs
 
+import org.gradle.api.Project
+
 /**
  * Created by aurel on 15/03/14.
  */
 class RenderSceneSpec {
 
+    private Project project
     File blendFile
     String scene
-    File outputPath
-    Closure rename
+    File outputFile
 
-    public RenderSceneSpec() {
-        rename = { s -> s }
+    public RenderSceneSpec(Project project) {
+        this.project = project
     }
 
-    def from(File file) {
-        blendFile = file
+    def from(Object file) {
+        blendFile = project.file(file)
     }
 
-    def render(String sceneName) {
+    def scene(String sceneName) {
         scene = sceneName
     }
 
-    def into(File path) {
-        outputPath = path
+    def into(Object file) {
+        outputFile = project.file(file)
     }
 
-    def rename(Closure c) {
-        rename = c
+    String getOutputPath() {
+        return outputFile.absolutePath.substring(0, outputFile.absolutePath.lastIndexOf(File.separator))
     }
-
 }

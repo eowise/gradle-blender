@@ -1,0 +1,14 @@
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'com.eowise:blender:0.5.0'
+    }
+}
+
+task testRenderImage(type: com.eowise.blender.render.RenderImage) {
+    scene "Scene"
+    from file("cube.blend")
+    into file("cube.png")
+}

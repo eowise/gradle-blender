@@ -6,6 +6,7 @@ import org.gradle.api.Task
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 
 /**
@@ -16,7 +17,7 @@ class RenderImage extends DefaultTask {
     RenderSceneSpec spec;
 
     RenderImage() {
-        spec = new RenderSceneSpec()
+        spec = new RenderSceneSpec(project)
     }
 
     @InputFile
@@ -29,14 +30,10 @@ class RenderImage extends DefaultTask {
         return spec.scene
     }
 
-    @Input
-    String getFileName() {
-        return spec.rename(spec.scene) + '.png'
-    }
 
-    @OutputDirectory
-    File getOutputDirectory() {
-        return spec.outputPath
+    @OutputFile
+    File getOutputFile() {
+        return spec.outputFile
     }
 
     @Override
@@ -49,18 +46,16 @@ class RenderImage extends DefaultTask {
 
     @TaskAction
     def run() {
-
         project.delete project.fileTree(temporaryDir).include('*')
 
         project.exec {
-            commandLine 'blender', '-b', getBlendFile(), '-S', getScene(), '-o', "${temporaryDir}/${name}-####", '-F', 'PNG', '-f', 1
+            commandLine 'blender', '-b', getBlendFile(), '-S', getScene(), '-o', "${temporaryDir}/${name}", '-F', 'PNG', '-f', 1
         }
 
         project.copy {
-            from temporaryDir
-            into getOutputDirectory()
-            include "${name}-0001.png"
-            rename { fileName -> getFileName()}
+            from "${temporaryDir}"
+            into spec.getOutputPath()
+            rename { fileName -> getOutputFile().getName() }
         }
     }
 }

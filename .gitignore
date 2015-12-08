@@ -3,4 +3,4 @@ build/
 .idea/
 gradle.properties
 fbx-conv.iml
-
+src/test/resources/**/*.png

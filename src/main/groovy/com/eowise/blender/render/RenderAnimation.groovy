@@ -16,7 +16,7 @@ class RenderAnimation extends DefaultTask {
     RenderAnimationSpec spec;
 
     RenderAnimation() {
-        spec = new RenderAnimationSpec()
+        spec = new RenderAnimationSpec(project)
     }
 
     @InputFile
@@ -31,7 +31,7 @@ class RenderAnimation extends DefaultTask {
 
     @OutputDirectory
     File getOutputDirectory() {
-        return spec.outputPath
+        return spec.outputFile
     }
 
     @Input
@@ -56,14 +56,13 @@ class RenderAnimation extends DefaultTask {
         project.delete project.fileTree(temporaryDir).include('*')
 
         project.exec {
-            commandLine 'blender', '-b', getBlendFile(), '-S', getScene(), '-o', "${temporaryDir}/${name}-####", '-F', 'PNG', '-s', getStart(), '-e', getEnd(), '-a'
+            commandLine 'blender', '-b', getBlendFile(), '-S', getScene(), '-o', "${temporaryDir}/${spec.scene}-####", '-F', 'PNG', '-s', getStart(), '-e', getEnd(), '-a'
         }
 
         project.copy {
             from temporaryDir
-            into getOutputDirectory()
-            include '*.png'
-            rename ~/${name}-(\d+)\.png/, spec.scene + '-$1.png'
+            into spec.getOutputPath()
+            rename spec.rename
         }
     }
 }
