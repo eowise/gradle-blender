@@ -11,6 +11,8 @@ import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
 
+import java.nio.file.Paths
+
 /**
  * Created by aurel on 23/01/14.
  */
@@ -38,8 +40,8 @@ class FbxConv extends DefaultTask {
         fbxFiles = files
     }
 
-    def into(File file) {
-        outputDir = file
+    def into(Object path) {
+        outputDir = project.file(path)
     }
 
     def fbx() {
@@ -112,17 +114,12 @@ class FbxConv extends DefaultTask {
                         def arguments = getArguments()
 
                         arguments.add(visitor.getFile())
+                        arguments.add(Paths.get(outputDir.toString(), visitor.getRelativePath().getParent().toString(), outputFile))
 
                         project.exec {
                             commandLine 'fbx-conv'
                             args arguments
                         }
-                        project.copy {
-                            from visitor.getFile().parentFile
-                            include outputFile
-                            into "${outputDir}/${visitor.getRelativePath().getParent()}"
-                        }
-                        project.delete("${visitor.getFile().parentFile}/${outputFile}")
                     }
                     else if (removedFiles.contains(visitor.getFile())) {
                         project.delete("${path}/${visitor.getPath()}")
