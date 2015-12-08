@@ -1,11 +1,13 @@
 package com.eowise.blender.fbxconv
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.file.DirectoryTree
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.FileTree
 import org.gradle.api.file.FileVisitDetails
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
@@ -24,37 +26,35 @@ class FbxConv extends DefaultTask {
     Integer maxVertices = null
     Integer maxBones = null
     Integer maxBoneWeights = null
-    PatternSet patternSet
 
-    @Input
-    Object baseDir
+
+    @InputFiles
+    ConfigurableFileTree fbxFiles
 
     @OutputDirectory
     File outputDir
 
-    public FbxConv() {
-        this.patternSet = new PatternSet()
-    }
+
 
     def from(Object path) {
-        baseDir = path
-        outputDir = project.file(baseDir)
+        fbxFiles = project.fileTree(path)
+        outputDir = project.file(path)
     }
 
     def include(Closure closure) {
-        patternSet.include(closure)
+        fbxFiles.include(closure)
     }
 
     def include(String... includes) {
-        patternSet.include(includes)
+        fbxFiles.include(includes)
     }
 
     def exclude(Closure closure) {
-        patternSet.exclude(closure)
+        fbxFiles.exclude(closure)
     }
 
     def exclude(String... excludes) {
-        patternSet.exclude(excludes)
+        fbxFiles.exclude(excludes)
     }
 
     def into(Object path) {
