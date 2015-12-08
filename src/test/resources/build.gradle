@@ -14,7 +14,7 @@ task testRenderImage(type: com.eowise.blender.render.RenderImage) {
 }
 
 task testFbxConv(type: com.eowise.blender.fbxconv.FbxConv) {
-    convert files("cube.fbx")
-    into "./"
+    from "./"
+    include "cube.fbx"
     g3dj()
 }

@@ -1,15 +1,15 @@
 package com.eowise.blender.fbxconv
 
-
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryTree
 import org.gradle.api.file.FileCollection
 import org.gradle.api.file.FileTree
 import org.gradle.api.file.FileVisitDetails
 import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.incremental.IncrementalTaskInputs
+import org.gradle.api.tasks.util.PatternSet
 
 import java.nio.file.Paths
 
@@ -24,20 +24,37 @@ class FbxConv extends DefaultTask {
     Integer maxVertices = null
     Integer maxBones = null
     Integer maxBoneWeights = null
+    PatternSet patternSet
 
-    @InputFiles
-    FileTree fbxFiles
+    @Input
+    Object baseDir
 
     @OutputDirectory
     File outputDir
 
-
-    def convert(FileCollection files) {
-        fbxFiles = files.getAsFileTree()
+    public FbxConv() {
+        this.patternSet = new PatternSet()
     }
 
-    def convert(FileTree files) {
-        fbxFiles = files
+    def from(Object path) {
+        baseDir = path
+        outputDir = project.file(baseDir)
+    }
+
+    def include(Closure closure) {
+        patternSet.include(closure)
+    }
+
+    def include(String... includes) {
+        patternSet.include(includes)
+    }
+
+    def exclude(Closure closure) {
+        patternSet.exclude(closure)
+    }
+
+    def exclude(String... excludes) {
+        patternSet.exclude(excludes)
     }
 
     def into(Object path) {
@@ -105,10 +122,11 @@ class FbxConv extends DefaultTask {
                 removedFiles.from(remove.file)
         }
 
+        FileTree fbxFiles = project.fileTree(baseDir).matching(patternSet)
 
         fbxFiles.visit {
             FileVisitDetails visitor ->
-                if (changedFiles.contains(visitor.getFile())) {
+                if (!incrementalInputs.isIncremental() || changedFiles.contains(visitor.getFile())) {
                     if (!visitor.isDirectory()) {
                         String outputFile = visitor.getName().replaceFirst(~/\.[^\.]+$/, '') + ".${format.toLowerCase()}"
                         def arguments = getArguments()
