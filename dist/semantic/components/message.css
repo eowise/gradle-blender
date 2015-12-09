@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.1.4 - Message
+ * # Semantic UI 2.1.6 - Message
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -461,3 +461,26 @@
     User Variable Overrides
 *******************************/
 
+.ui.icon.message {
+  background: none;
+}
+.ui.success.icon.message a,
+.ui.positive.icon.message a,
+.ui.success.icon.message .icon,
+.ui.positive.icon.message .icon {
+  color: #21BA45;
+}
+.ui.info.icon.message a,
+.ui.info.icon.message .icon {
+  color: #2185D0;
+}
+.ui.warning.icon.message a,
+.ui.warning.icon.message .icon {
+  color: #F2711C;
+}
+.ui.error.icon.message a,
+.ui.negative.icon.message a,
+.ui.error.icon.message .icon,
+.ui.negative.icon.message .icon {
+  color: #DB2828;
+}

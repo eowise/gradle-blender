@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.1.4 - Header
+ * # Semantic UI 2.1.6 - Header
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -38,6 +38,7 @@
 ---------------*/
 
 .ui.header .sub.header {
+  display: block;
   font-weight: normal;
   padding: 0em;
   margin: 0em;
@@ -718,3 +719,6 @@ a.ui.inverted.grey.header:hover {
          Site Overrides
 *******************************/
 
+.ui.header span.sub.header {
+  display: inline;
+}

@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI 2.1.4 - Segment
+ * # Semantic UI 2.1.6 - Segment
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -135,7 +135,6 @@
 .ui.piled.segments:before,
 .ui.piled.segment:before {
   -webkit-transform: rotate(-1.2deg);
-      -ms-transform: rotate(-1.2deg);
           transform: rotate(-1.2deg);
   top: 0;
   z-index: -2;
@@ -143,7 +142,6 @@
 .ui.piled.segments:after,
 .ui.piled.segment:after {
   -webkit-transform: rotate(1.2deg);
-      -ms-transform: rotate(1.2deg);
           transform: rotate(1.2deg);
   top: 0;
   z-index: -1;
@@ -377,6 +375,11 @@
   border: none;
   box-shadow: none;
   border-left: 1px solid rgba(34, 36, 38, 0.15);
+}
+
+/* Border Fixes */
+.ui.segments > .horizontal.segments:first-child {
+  border-top: none;
 }
 .ui.horizontal.segments > .segment:first-child {
   border-left: none;
@@ -756,18 +759,4 @@
 .ui.thin.segment {
   margin: 0;
   padding: 0.5em;
-}
-.ui.positive.icon.message {
-  border-top: 2px solid #21BA45;
-  background: none;
-}
-.ui.positive.icon.message a {
-  color: #21BA45;
-}
-.ui.info.icon.message {
-  border-top: 2px solid #2185D0;
-  background: none;
-}
-.ui.info.icon.message a {
-  color: #2185D0;
 }
