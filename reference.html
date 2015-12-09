@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+
+
+<html>
+        <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='content-type'>
+        <meta charset='utf-8'>
+        <title>Reference - eowise</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
+        <link href="/dist/semantic/semantic.css" rel="stylesheet" type="text/css">
+        <link href="/css/base.css" rel="stylesheet" type="text/css">
+        <script src="/dist/jquery/jquery.custom.js"></script>
+        <script src="/dist/semantic/semantic.js"></script>
+    </head>
+
+    <body class="index">
+        <a name="top"></a>
+        <div id="root" class="ui raised text container segments">
+            <div id="header" class="ui inverted basic segment">
+            	<div class="ui large inverted secondary menu">
+            		<a class="header item" href="/">Eowise</a>
+<div class="right menu">
+    
+    <a class="active item" href="/open-source/">Open source</a>
+    <a class="item" href="/blog/">Blog</a>
+</div>
+
+                </div>
+            </div>
+            <div id ="description" class="ui inverted tertiary orange segment">
+                <div class="ui inverted secondary menu">
+                    <span class="header item" href="/">gradle-blender</span>
+                    <div class="right menu">
+                        
+                        <a class="item" href="/index.html">
+                            <i class="flag icon"></i>
+                            Getting started 
+                        </a>
+                        
+                        <a class="active item" href="/reference.html">
+                            <i class="book icon"></i>
+                            Reference 
+                        </a>
+                        
+                        
+                        <a class="item" href="https://github.com/eowise/gradle-blender" target="_blank">
+                            <i class="github icon"></i>
+                            Github
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div id="content" class="ui basic segment">
+                
+<p>The <code>gradle-blender</code> project is made of 3 Gradle tasks:</p>
+<div class="ui bulleted list">
+    <div class="item">
+        <div class="content">
+            <a href="reference.html#fbx-conv" class="header">com.eowise.blender.fbxconv.FbxConv</a>
+            <div class="description">Convert FBX files to G3DJ or G3DB.</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="content">
+            <a href="reference.html#render-image" class="header">com.eowise.blender.render.RenderImage</a>
+            <div class="description">Render a Blender scene.</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="content">
+            <a href="reference.html#render-animation" class="header">com.eowise.blender.render.RenderAnimation</a>
+            <div class="description">Render a Blender animation.</div>
+        </div>
+    </div>
+</div>
+<a name="fbx-conv"></a>
+<h1 class="ui orange dividing header">FbxConv task</h1>
+<p>This task wrap the <a href="https://github.com/libgdx/fbx-conv">libGDX fbx-conv</a> command line executable. You specify the files you want to convert, where to write the converted files, and the format in witch you want to convert the files.</p>
+<p>For instance, the task below take all the <code>.fbx</code> files in the <span class="ui basic compact label"><i class="grey folder outline icon"></i>resources</span> folder and convert them to the G3DB format in the <span class="ui basic compact label"><i class="grey folder outline icon"></i>assets/3d</span> folder:</p>
+<div class="ui stacked segments">
+    <div class="ui inverted stacked grey segment">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">convertFbx</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">blender</span><span class="o">.</span><span class="na">fbxconv</span><span class="o">.</span><span class="na">FbxConv</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">from</span> <span class="s1">'resources'</span>
+    <span class="n">include</span> <span class="s1">'*.fbx'</span>
+    <span class="n">into</span> <span class="s1">'assets/3d'</span>
+    <span class="n">g3db</span><span class="o">()</span>
+<span class="o">}</span></code></pre></figure>
+    </div>
+</div>
+<p>You can use the above methods to configure a <code>com.eowise.blender.fbxconv.FbxConv</code> task.</p>
+<h2 class="ui dividing header">Methods</h2>
+<h3 class="ui small header">
+    <code class="compact">from(Object path)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Set the base path of the .fbx files to be converted. The given path is evaluated as per Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.lang.Object)">Project.file()</a>.</p>
+<h3 class="ui small header">
+    <code class="compact">include(String... includes)</code>
+    <span class="sub header">or</span>
+    <code class="compact">include(Closure closure)</code>
+</h3>
+<p>Adds an include pattern as defined in Gradle <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/util/PatternFilterable.html">PatternFilterable</a>. This method may be called multiple times to append new patterns.</p>
+<div class="ui warning icon message">
+    <i class="warning sign icon"></i>
+    <div class="content">
+        <p>If includes are not provided, then all files in the base path folder and sub folders will be included.</p>
+    </div>
+</div>
+<h3 class="ui small header">
+    <code class="compact">exclude(String... excludes)</code>
+    <span class="sub header">or</span>
+    <code class="compact">exclude(Closure closure)</code>
+</h3>
+<p>Adds an exclude pattern as defined in Gradle <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/util/PatternFilterable.html">PatternFilterable</a>. This method may be called multiple times to append new patterns.</p>
+<h3 class="ui small header">
+    <code class="compact">into(Object path)</code>
+</h3>
+<p>Set the base folder where the converted files will be created.</p>
+<h3 class="ui small header">
+    <code class="compact">g3dj()</code>
+    <span class="sub header">or</span>
+    <code class="compact">g3db()</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Use one of the above method to set the type of the output files, either G3DJ or G3DB.</p>
+<h3 class="ui small header">
+    <code class="compact">flip()</code>
+    <span class="sub header">,</span>
+    <code class="compact">pack()</code>
+    <span class="sub header">and other optionals methods</span>
+</h3>
+<p>It's possible to set other <code>fbx-conv</code> flags with theses methods:</p>
+<table class="ui small compact celled table">
+    <thead>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="top aligned">
+            <td><code class="compact">flip()</code></td>
+            <td>
+                <p>Flip the V texture coordinates.</p>
+                <div class="ui basic label"><i class="blue info icon"></i>fbx-conv command line flag<code class="detail">-f</code></div>
+            </td>
+        </tr>
+        <tr class="top aligned">
+            <td><code class="compact">pack()</code></td>
+            <td>
+                <p>Pack vertex colors to one float.</p>
+                <div class="ui basic label"><i class="blue info icon"></i>fbx-conv command line flag<code class="detail">-p</code></div>
+            </td>
+        </tr>
+        <tr class="top aligned">
+            <td><code class="compact">maxVertices(String size)</code></td>
+            <td>
+                <p>The maximum amount of vertices or indices a mesh may contain.</p>
+                <div class="ui basic label"><i class="blue info icon"></i>fbx-conv command line flag<code class="detail">-m &lt;size&gt;</code></div>
+            </td>
+        </tr>
+        <tr class="top aligned">
+            <td><code class="compact">maxBones(String size)</code></td>
+            <td>
+                <p>The maximum amount of bones a nodepart can contain.</p>
+                <div class="ui basic label"><i class="blue info icon"></i>fbx-conv command line flag<code class="detail">-b &lt;size&gt;</code></div>
+            </td>
+        </tr>
+        <tr class="top aligned">
+            <td><code class="compact">maxBoneWeights(String size)</code></td>
+            <td>
+                <p>The maximum amount of bone weights per vertex.</p>
+                <div class="ui basic label"><i class="blue info icon"></i>fbx-conv command line flag<code class="detail">-w &lt;size&gt;</code></div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<a name="render-image"></a>
+<h1 class="ui orange dividing header">RenderImage task</h1>
+<p>This task call the <a href="http://www.blender.org/manual/render/workflows/command_line.html">Blender command line</a> in order to render a scene.</p>
+<div class="ui stacked segments">
+    <div class="ui inverted stacked grey segment">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">renderImage</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">blender</span><span class="o">.</span><span class="na">render</span><span class="o">.</span><span class="na">RenderImage</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">scene</span> <span class="s1">'Hero'</span>
+    <span class="n">from</span> <span class="s1">'3d/actors.blend'</span>
+    <span class="n">into</span> <span class="s1">'assets/actors/hero.png'</span>
+<span class="o">}</span></code></pre></figure>
+    </div>
+</div>
+<h2 class="ui dividing header">Methods</h2>
+<h3 class="ui small header">
+    <code class="compact">scene(String sceneName)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Set the scene you want to render.</p>
+<h3 class="ui small header">
+    <code class="compact">from(Object file)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Set the <code>.blend</code> file that contains the scene you want to render. The given file is evaluated as per Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.lang.Object)">Project.file()</a>.</p>
+<h3 class="ui small header">
+    <code class="compact">into(Object file)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Set the file where the rendered asset will be writen. Just like the <code>from</code> method, the given file is evaluated as per Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.lang.Object)">Project.file()</a>.</p>
+<a name="render-animation"></a>
+<h1 class="ui orange dividing header">RenderAnimation task</h1>
+<p>This task call the <a href="http://www.blender.org/manual/render/workflows/command_line.html">Blender command line</a> in order to render an animation.</p>
+<div class="ui stacked segments">
+    <div class="ui inverted stacked grey segment">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">renderAnimation</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">blender</span><span class="o">.</span><span class="na">render</span><span class="o">.</span><span class="na">RenderAnimation</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">scene</span> <span class="s1">'HeroRun'</span>
+    <span class="n">from</span> <span class="s1">'3d/actors.blend'</span>
+    <span class="n">into</span> <span class="s1">'assets/actors/'</span>
+    <span class="n">start</span> <span class="mi">1</span>
+    <span class="n">end</span> <span class="mi">100</span>
+<span class="o">}</span></code></pre></figure>
+    </div>
+</div>
+<h2 class="ui dividing header">Methods</h2>
+<p>All methods defined for the <code>RenderImage</code> task above are also valid for <code>RenderAnimation</code> task.</p>
+<h3 class="ui small header">
+    <code class="compact">into(Object path)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Set the path where the rendered animation files will be writen. Just like the <code>from</code> method, the given path is evaluated as per Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.lang.Object)">Project.file()</a>.</p>
+<h3 class="ui small header">
+    <code class="compact">start(int value)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<h3 class="ui small header">
+    <code class="compact">end(int value)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p></p>
+<h3 class="ui small header">
+    <code class="compact">rename(Closure c)</code>
+</h3>
+<p>Set the closure that will be used </p>
+            </div>
+        </div>
+        <div id="footer">
+	<p class="fixie"></p>
+</div>
+<script type="text/javascript">
+    
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36528878-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    
+</script>
+        <script type="text/javascript">
+            jQuery('.ui.sticky').sticky({context: '#content'});
+            jQuery('.overlay').visibility({
+                type   : 'fixed',
+            });
+        </script>
+    </body>
+</html>
