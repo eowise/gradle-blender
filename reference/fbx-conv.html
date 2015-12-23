@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+
+
+<html>
+        <head>
+        <meta content='text/html; charset=UTF-8' http-equiv='content-type'>
+        <meta charset='utf-8'>
+        <title>FbxConv - eowise</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
+        <link href="/dist/semantic/semantic.css" rel="stylesheet" type="text/css">
+        <link href="/css/base.css" rel="stylesheet" type="text/css">
+        <script src="/dist/jquery/jquery.custom.js"></script>
+        <script src="/dist/semantic/semantic.js"></script>
+    </head>
+
+    <body class="index">
+        <a name="top"></a>
+        <div id="root" class="ui raised text container segments">
+            
+            <div id ="description" class="ui inverted tertiary orange segment">
+                <div class="ui inverted secondary menu">
+                    <span class="header item" href="/">gradle-blender</span>
+                    <div class="right menu">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a class="item" href="/index.html">
+                            <i class="flag icon"></i>
+                            Getting started 
+                        </a>
+                        
+                        
+                        
+                        <a class="active item" href="/reference.html">
+                            <i class="book icon"></i>
+                            Reference 
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a class="item" href="https://github.com/eowise/gradle-blender" target="_blank">
+                            <i class="github icon"></i>
+                            Github
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div id="content" class="ui basic segment">
+                
+<h1 class="ui orange dividing header">FbxConv task</h1>
+<p>When building a 3D libgdx game with 3D models created in Blender, you need to <a href="https://github.com/libgdx/libgdx/wiki/Importing-Blender-models-in-LibGDX">convert these models to a format supported by libgdx</a>. Libgdx provides a command line tool to do this: <a href="https://github.com/libgdx/fbx-conv">fbx-conv</a>.</p>
+<p>The <code class="compact">com.eowise.blender.fbxconv.FbxConv</code> task wrap the <a href="https://github.com/libgdx/fbx-conv">fbx-conv</a> command line. You specify the files you want to convert, where to write the converted files, and the format in witch you want to convert the files.</p>
+<div class="ui warning icon message">
+    <i class="warning sign icon"></i>
+    <div class="content">
+        <p>To use this feature, the path to the <code>fbx-conv</code> command line must be available in the PATH environment variable.</p>
+    </div>
+</div>
+<p>In the example below, the <code>convertFbx</code> task take all the <code>.fbx</code> files in the <span class="ui basic compact label"><i class="grey folder outline icon"></i>resources</span> folder and convert them to the G3DB format in the <span class="ui basic compact label"><i class="grey folder outline icon"></i>assets/3d</span> folder:</p>
+<div class="ui stacked segments">
+    <div class="ui inverted stacked grey segment">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">convertFbx</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">blender</span><span class="o">.</span><span class="na">fbxconv</span><span class="o">.</span><span class="na">FbxConv</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">from</span> <span class="s1">'resources'</span>
+    <span class="n">include</span> <span class="s1">'*.fbx'</span>
+    <span class="n">into</span> <span class="s1">'assets/3d'</span>
+    <span class="n">g3db</span><span class="o">()</span>
+<span class="o">}</span></code></pre></figure>
+    </div>
+</div>
+<div class="ui info icon message">
+    <i class="info icon"></i>
+    <div class="content">
+        <div class="ui small header">Incremental processing</div>
+        <p>The <code>FbxConv</code> task take advantage of a Gradle feature allowing to track when input files are modified. Therefore the processed input files are only those that have changed since the last execution.</p>
+    </div>
+</div>
+<p>You can go further with the methods reference below or with several <a href="use-cases.html#fbx-conv">use cases</a>.</p>
+<h2 class="ui dividing header">Methods</h2>
+<p>You can use the above methods to configure a <code>com.eowise.blender.fbxconv.FbxConv</code> task.</p>
+<div class="ui fluid styled accordion">
+    <h3 class="ui small header title">
+        <code>from(Object path)</code>
+        <div class="ui horizontal basic red left pointing label">required</div>
+    </h3>
+    <div class="content">
+        <p>Set the base path of the .fbx files to be converted. The given path is evaluated as per Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.lang.Object)">Project.file()</a>.</p>
+    </div>
+    <h3 class="ui small header title">
+        <code>include(String... includes)</code>
+        <span class="sub header">or</span>
+        <code>include(Closure closure)</code>
+    </h3>
+    <div class="content">
+        <p>Adds an include pattern as defined in Gradle <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/util/PatternFilterable.html">PatternFilterable</a>. This method may be called multiple times to append new patterns.</p>
+        <div class="ui warning icon message">
+            <i class="warning sign icon"></i>
+            <div class="content">
+                <p>If includes are not provided, then all files in the base path folder and sub folders will be included.</p>
+            </div>
+        </div>
+    </div>
+    <h3 class="ui small header title">
+        <code>exclude(String... excludes)</code>
+        <span class="sub header">or</span>
+        <code>exclude(Closure closure)</code>
+    </h3>
+    <div class="content">
+        <p>Adds an exclude pattern as defined in Gradle <a href="https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/util/PatternFilterable.html">PatternFilterable</a>. This method may be called multiple times to append new patterns.</p>
+    </div>
+    <h3 class="ui small header title">
+        <code>into(Object path)</code>
+    </h3>
+    <div class="content">
+        <p>Set the base folder where the converted files will be created. Just like the <code>from</code> method, the given path is evaluated as per Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.lang.Object)">Project.file()</a>.</p>
+        <div class="ui info icon message">
+            <i class="info icon"></i>
+            <div class="content">
+                <p>If the destination base folder is not specified, each converted file will be created in the same folder of the corresponding <code>.fbx</code> file.</p>
+            </div>
+        </div>
+    </div>
+    <h3 class="ui small header title">
+        <code>g3dj()</code>
+        <span class="sub header">or</span>
+        <code>g3db()</code>
+        <div class="ui horizontal basic red left pointing label">required</div>
+    </h3>
+    <div class="content">
+        <p>Use one of the above method to set the type of the output files, either G3DJ or G3DB.</p>
+    </div>
+    <h3 class="ui small header title">
+        <code>flip()</code><span class="sub header">,</span>
+        <code>pack()</code>
+        <span class="sub header">and other optionals methods</span>
+    </h3>
+    <div class="content">
+        <p>It's possible to set other <code>fbx-conv</code> flags with theses methods:</p>
+        <table class="ui small compact celled table">
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="top aligned">
+                    <td><code class="compact">flip()</code></td>
+                    <td>
+                        <p>Flip the V texture coordinates.</p>
+                        <div class="ui basic label"><i class="blue info icon"></i>fbx-conv command line flag<code class="detail">-f</code></div>
+                    </td>
+                </tr>
+                <tr class="top aligned">
+                    <td><code class="compact">pack()</code></td>
+                    <td>
+                        <p>Pack vertex colors to one float.</p>
+                        <div class="ui basic label"><i class="blue info icon"></i>fbx-conv command line flag<code class="detail">-p</code></div>
+                    </td>
+                </tr>
+                <tr class="top aligned">
+                    <td><code class="compact">maxVertices(String size)</code></td>
+                    <td>
+                        <p>The maximum amount of vertices or indices a mesh may contain.</p>
+                        <div class="ui basic label"><i class="blue info icon"></i>fbx-conv command line flag<code class="detail">-m &lt;size&gt;</code></div>
+                    </td>
+                </tr>
+                <tr class="top aligned">
+                    <td><code class="compact">maxBones(String size)</code></td>
+                    <td>
+                        <p>The maximum amount of bones a nodepart can contain.</p>
+                        <div class="ui basic label"><i class="blue info icon"></i>fbx-conv command line flag<code class="detail">-b &lt;size&gt;</code></div>
+                    </td>
+                </tr>
+                <tr class="top aligned">
+                    <td><code class="compact">maxBoneWeights(String size)</code></td>
+                    <td>
+                        <p>The maximum amount of bone weights per vertex.</p>
+                        <div class="ui basic label"><i class="blue info icon"></i>fbx-conv command line flag<code class="detail">-w &lt;size&gt;</code></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<h2 class="ui dividing header">Use cases</h2>
+<h3 class="ui dividing header">Integrate in Gradle build</h3>
+<script type="text/javascript">
+    jQuery('.ui.accordion').accordion({exclusive: false});
+</script>
+            </div>
+        </div>
+        <div id="footer">
+	<p class="fixie"></p>
+</div>
+<script type="text/javascript">
+    
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36528878-1']);
+    _gaq.push(['_trackPageview']);
+    
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    
+</script>
+        <script type="text/javascript">
+            jQuery('.ui.sticky').sticky({context: '#content'});
+            jQuery('.overlay').visibility({
+                type   : 'fixed',
+            });
+        </script>
+    </body>
+</html>

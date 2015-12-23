@@ -6,7 +6,7 @@
         <head>
         <meta content='text/html; charset=UTF-8' http-equiv='content-type'>
         <meta charset='utf-8'>
-        <title>Reference - eowise</title>
+        <title>RenderAnimation - eowise</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
         <link href="/dist/semantic/semantic.css" rel="stylesheet" type="text/css">
         <link href="/css/base.css" rel="stylesheet" type="text/css">
@@ -35,7 +35,7 @@
                         
                         
                         
-                        <a class="active item" href="/reference.html">
+                        <a class="item" href="/reference.html">
                             <i class="book icon"></i>
                             Reference 
                         </a>
@@ -53,39 +53,39 @@
                 </div>
             </div>
             <div id="content" class="ui basic segment">
-                
-<h1 class="ui orange dividing header">Introduction</h1>
-<p>This is the DSL reference for the <code>gradle-blender</code> project. Start reading by finding the right type for the task you are using.</p>
-<h1 class="ui orange dividing header">Task types</h1>
-<p>The <code>gradle-blender</code> project is made of 3 Gradle task types:</p>
-<table class="ui small compact celled table">
-    <thead>
-        <tr>
-            <th>Task</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <a href="reference/render-image.html">RenderImage</a>
-            </td>
-            <td>Render a Blender scene to an image file.</td>
-        </tr>
-        <tr>
-            <td class="content">
-                <a href="reference/render-animation.html">RenderAnimation</a>
-            </td>
-            <td>Render a Blender animation to images files.</td>
-        </tr>
-        <tr>
-            <td>
-                <a href="reference/fbx-conv.html">FbxConv</a>
-            </td>
-            <td>Convert FBX files to G3DJ or G3DB formats.</td>
-        </tr>
-    </tbody>
-</table>
+                <h1 class="ui  dividing header">RenderAnimation task</h1>
+<p>This task call the <a href="http://www.blender.org/manual/render/workflows/command_line.html">Blender command line</a> in order to render an animation.</p>
+<div class="ui stacked segments">
+    <div class="ui inverted stacked grey segment">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">renderAnimation</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">blender</span><span class="o">.</span><span class="na">render</span><span class="o">.</span><span class="na">RenderAnimation</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">scene</span> <span class="s1">'HeroRun'</span>
+    <span class="n">from</span> <span class="s1">'3d/actors.blend'</span>
+    <span class="n">into</span> <span class="s1">'assets/actors/'</span>
+    <span class="n">start</span> <span class="mi">1</span>
+    <span class="n">end</span> <span class="mi">100</span>
+<span class="o">}</span></code></pre></figure>
+    </div>
+</div>
+<h2 class="ui dividing header">Methods</h2>
+<p>All methods defined for the <code>RenderImage</code> task above are also valid for <code>RenderAnimation</code> task.</p>
+<h3 class="ui small header">
+    <code class="compact">into(Object path)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Set the path where the rendered animation files will be writen. Just like the <code>from</code> method, the given path is evaluated as per Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.lang.Object)">Project.file()</a>.</p>
+<h3 class="ui small header">
+    <code class="compact">start(int value)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<h3 class="ui small header">
+    <code class="compact">end(int value)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p></p>
+<h3 class="ui small header">
+    <code class="compact">rename(Closure c)</code>
+</h3>
+<p>Set the closure that will be used </p>
 
             </div>
         </div>

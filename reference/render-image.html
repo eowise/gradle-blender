@@ -6,7 +6,7 @@
         <head>
         <meta content='text/html; charset=UTF-8' http-equiv='content-type'>
         <meta charset='utf-8'>
-        <title>Reference - eowise</title>
+        <title>RenderImage - eowise</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
         <link href="/dist/semantic/semantic.css" rel="stylesheet" type="text/css">
         <link href="/css/base.css" rel="stylesheet" type="text/css">
@@ -35,7 +35,7 @@
                         
                         
                         
-                        <a class="active item" href="/reference.html">
+                        <a class="item" href="/reference.html">
                             <i class="book icon"></i>
                             Reference 
                         </a>
@@ -53,39 +53,33 @@
                 </div>
             </div>
             <div id="content" class="ui basic segment">
-                
-<h1 class="ui orange dividing header">Introduction</h1>
-<p>This is the DSL reference for the <code>gradle-blender</code> project. Start reading by finding the right type for the task you are using.</p>
-<h1 class="ui orange dividing header">Task types</h1>
-<p>The <code>gradle-blender</code> project is made of 3 Gradle task types:</p>
-<table class="ui small compact celled table">
-    <thead>
-        <tr>
-            <th>Task</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <a href="reference/render-image.html">RenderImage</a>
-            </td>
-            <td>Render a Blender scene to an image file.</td>
-        </tr>
-        <tr>
-            <td class="content">
-                <a href="reference/render-animation.html">RenderAnimation</a>
-            </td>
-            <td>Render a Blender animation to images files.</td>
-        </tr>
-        <tr>
-            <td>
-                <a href="reference/fbx-conv.html">FbxConv</a>
-            </td>
-            <td>Convert FBX files to G3DJ or G3DB formats.</td>
-        </tr>
-    </tbody>
-</table>
+                <h1 class="ui  dividing header">RenderImage task</h1>
+<p>This task call the <a href="http://www.blender.org/manual/render/workflows/command_line.html">Blender command line</a> in order to render a scene.</p>
+<div class="ui stacked segments">
+    <div class="ui inverted stacked grey segment">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">renderImage</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">blender</span><span class="o">.</span><span class="na">render</span><span class="o">.</span><span class="na">RenderImage</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">scene</span> <span class="s1">'Hero'</span>
+    <span class="n">from</span> <span class="s1">'3d/actors.blend'</span>
+    <span class="n">into</span> <span class="s1">'assets/actors/hero.png'</span>
+<span class="o">}</span></code></pre></figure>
+    </div>
+</div>
+<h2 class="ui dividing header">Methods</h2>
+<h3 class="ui small header">
+    <code class="compact">scene(String sceneName)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Set the scene you want to render.</p>
+<h3 class="ui small header">
+    <code class="compact">from(Object file)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Set the <code>.blend</code> file that contains the scene you want to render. The given file is evaluated as per Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.lang.Object)">Project.file()</a>.</p>
+<h3 class="ui small header">
+    <code class="compact">into(Object file)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Set the file where the rendered asset will be writen. Just like the <code>from</code> method, the given file is evaluated as per Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.lang.Object)">Project.file()</a>.</p>
 
             </div>
         </div>

@@ -8,40 +8,40 @@
         <meta charset='utf-8'>
         <title>Getting started - eowise</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1' name='viewport'>
-        <link href="/gradle-blender/dist/semantic/semantic.css" rel="stylesheet" type="text/css">
-        <link href="/gradle-blender/css/base.css" rel="stylesheet" type="text/css">
-        <script src="/gradle-blender/dist/jquery/jquery.custom.js"></script>
-        <script src="/gradle-blender/dist/semantic/semantic.js"></script>
+        <link href="/dist/semantic/semantic.css" rel="stylesheet" type="text/css">
+        <link href="/css/base.css" rel="stylesheet" type="text/css">
+        <script src="/dist/jquery/jquery.custom.js"></script>
+        <script src="/dist/semantic/semantic.js"></script>
     </head>
 
     <body class="index">
         <a name="top"></a>
         <div id="root" class="ui raised text container segments">
-            <div id="header" class="ui inverted basic segment">
-            	<div class="ui large inverted secondary menu">
-            		<a class="header item" href="/">Eowise</a>
-<div class="right menu">
-    
-    <a class="active item" href="/open-source/">Open source</a>
-    <a class="item" href="/blog/">Blog</a>
-</div>
-
-                </div>
-            </div>
+            
             <div id ="description" class="ui inverted tertiary orange segment">
                 <div class="ui inverted secondary menu">
                     <span class="header item" href="/">gradle-blender</span>
                     <div class="right menu">
                         
-                        <a class="active item" href="/gradle-blender/index.html">
+                        
+                        
+                        
+                        
+                        
+                        <a class="active item" href="/index.html">
                             <i class="flag icon"></i>
                             Getting started 
                         </a>
                         
-                        <a class="item" href="/gradle-blender/reference.html">
+                        
+                        
+                        <a class="item" href="/reference.html">
                             <i class="book icon"></i>
                             Reference 
                         </a>
+                        
+                        
+                        
                         
                         
                         <a class="item" href="https://github.com/eowise/gradle-blender" target="_blank">
@@ -64,7 +64,6 @@
 </ul>
 <h1 class="ui orange dividing header">Install</h3>
 <p>To enable the <code>gradle-blender</code> Gradle tasks, please add one of the following snippets to your build.gradle file:</p>
-
 <div class="ui stacked segments">
     <div class="ui thin basic secondary inverted grey segment">
         <div class="ui thin secondary inverted tabs menu">
@@ -92,32 +91,73 @@
     </div>
 </div>
 <h1 class="ui orange dividing header">Getting started</h3>
-<p>This project is compound of three Gradle tasks classes. Depending of your need, create a task of the corresponding type, as described below.</p>
-<h2 class="ui dividing header">Rendering images</h2>
-<a href="reference.html#render-image">com.eowise.blender.render.RenderImage</a>
-<h2 class="ui dividing header">Rendering animations</h2>
-<a href="reference.html#render-animation">com.eowise.blender.render.RenderAnimation</a>
-<h2 class="ui dividing header">Converting FBX files to a libgdx format</h2>
-<p>When building a 3D libgdx game with 3D models created in Blender, you need to <a href="https://github.com/libgdx/libgdx/wiki/Importing-Blender-models-in-LibGDX">convert these models to a format supported by libgdx</a>. Libgdx provides a command line tool to do this: <a href="https://github.com/libgdx/fbx-conv">fbx-conv</a>.</p>
-<p>The <code class="compact">com.eowise.blender.fbxconv.FbxConv</code> task wrap the <a href="https://github.com/libgdx/fbx-conv">fbx-conv</a> command line. You specify the files you want to convert, where to write the converted files, and the format in witch you want to convert the files.</p>
-<div class="ui warning icon message">
-    <i class="warning sign icon"></i>
-    <div class="content">
-        <p>To use this feature, the path to the <code>fbx-conv</code> command line must be available in the PATH environment variable.</p>
-    </div>
-</div>
-<p>In the example below, the <code>convertFbx</code> task take all the <code>.fbx</code> files in the <span class="ui basic compact label"><i class="grey folder outline icon"></i>resources</span> folder and convert them to the G3DB format in the <span class="ui basic compact label"><i class="grey folder outline icon"></i>assets/3d</span> folder:</p>
+<p>This project is compound of three Gradle tasks classes. Depending of your need described below, create a task of the corresponding type.</p>
+<table class="ui small compact celled table">
+    <thead>
+        <tr>
+            <th>Task</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <a href="reference/render-image.html">RenderImage</a>
+            </td>
+            <td>Render a Blender scene to an image file.</td>
+        </tr>
+        <tr>
+            <td class="content">
+                <a href="reference/render-animation.html">RenderAnimation</a>
+            </td>
+            <td>Render a Blender animation to images files.</td>
+        </tr>
+        <tr>
+            <td>
+                <a href="reference/fbx-conv.html">FbxConv</a>
+            </td>
+            <td>Convert FBX files to G3DJ or G3DB formats.</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>The links in the table above point to the corresponding task reference. There is also a simple example for each task below:</p>
 <div class="ui stacked segments">
-    <div class="ui inverted stacked grey segment">
+    <div class="ui thin basic secondary inverted grey segment">
+        <div class="ui thin secondary inverted tabs menu">
+            <span class="header item">Basic examples</span>
+            <a class="active item" data-tab="RenderImage">RenderImage</a>
+            <a class="item" data-tab="RenderAnimation">RenderAnimation</a>
+            <a class="item" data-tab="FbxConv">FbxConv</a>
+        </div>
+    </div>
+    <div class="ui inverted grey segment">
+        <div class="ui active tab" data-tab="RenderImage">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">renderImage</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">blender</span><span class="o">.</span><span class="na">render</span><span class="o">.</span><span class="na">RenderImage</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">scene</span> <span class="s1">'Hero'</span>
+    <span class="n">from</span> <span class="s1">'3d/actors.blend'</span>
+    <span class="n">into</span> <span class="s1">'assets/actors/hero.png'</span>
+<span class="o">}</span></code></pre></figure>
+        </div>
+        <div class="ui tab" data-tab="RenderAnimation">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">renderAnimation</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">blender</span><span class="o">.</span><span class="na">render</span><span class="o">.</span><span class="na">RenderAnimation</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">scene</span> <span class="s1">'HeroRun'</span>
+    <span class="n">from</span> <span class="s1">'3d/actors.blend'</span>
+    <span class="n">into</span> <span class="s1">'assets/actors/'</span>
+    <span class="n">start</span> <span class="mi">1</span>
+    <span class="n">end</span> <span class="mi">100</span>
+<span class="o">}</span></code></pre></figure>
+        </div>
+        <div class="ui tab" data-tab="FbxConv">
 <figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">convertFbx</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">blender</span><span class="o">.</span><span class="na">fbxconv</span><span class="o">.</span><span class="na">FbxConv</span><span class="o">)</span> <span class="o">{</span>
     <span class="n">from</span> <span class="s1">'resources'</span>
     <span class="n">include</span> <span class="s1">'*.fbx'</span>
     <span class="n">into</span> <span class="s1">'assets/3d'</span>
     <span class="n">g3db</span><span class="o">()</span>
 <span class="o">}</span></code></pre></figure>
+        </div>
     </div>
 </div>
-<p>You can go further with the <code class="compact">com.eowise.blender.fbxconv.FbxConv</code> task <a href="reference.html#fbx-conv">reference</a> or several <a href="use-cases.html#fbx-conv">use cases</a>.</p>
 <script type="text/javascript">
     $('.tabs .item').tab();
 </script>
