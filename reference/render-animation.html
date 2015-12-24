@@ -53,7 +53,8 @@
                 </div>
             </div>
             <div id="content" class="ui basic segment">
-                <h1 class="ui  dividing header">RenderAnimation task</h1>
+                
+<h1 class="ui orange dividing header">RenderAnimation task</h1>
 <p>This task call the <a href="http://www.blender.org/manual/render/workflows/command_line.html">Blender command line</a> in order to render an animation.</p>
 <div class="ui stacked segments">
     <div class="ui inverted stacked grey segment">
@@ -67,25 +68,64 @@
     </div>
 </div>
 <h2 class="ui dividing header">Methods</h2>
-<p>All methods defined for the <code>RenderImage</code> task above are also valid for <code>RenderAnimation</code> task.</p>
+<h3 class="ui small header">
+    <code class="compact">scene(String sceneName)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Set the scene you want to render.</p>
+<h3 class="ui small header">
+    <code class="compact">from(Object file)</code>
+    <div class="ui horizontal basic red left pointing label">required</div>
+</h3>
+<p>Set the <code>.blend</code> file that contains the scene you want to render. The given file is evaluated as per Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.lang.Object)">Project.file()</a>.</p>
 <h3 class="ui small header">
     <code class="compact">into(Object path)</code>
     <div class="ui horizontal basic red left pointing label">required</div>
 </h3>
 <p>Set the path where the rendered animation files will be writen. Just like the <code>from</code> method, the given path is evaluated as per Gradle <a href="https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.Project:file(java.lang.Object)">Project.file()</a>.</p>
+<p>The rendered images files names will be compound of the scene name and the frame number using 4 padded zeros. For instance <code class="compact">HeroRun-0001.png</code> to <code class="compact">HeroRun-0100.png</code>.</p>
+<p>If you want to customize the names of output files, see the <code class="compact">rename</code> method below.</p>
 <h3 class="ui small header">
     <code class="compact">start(int value)</code>
     <div class="ui horizontal basic red left pointing label">required</div>
 </h3>
+<p>Set the start frame.</p>
 <h3 class="ui small header">
     <code class="compact">end(int value)</code>
     <div class="ui horizontal basic red left pointing label">required</div>
 </h3>
-<p></p>
+<p>Set the end frame.</p>
 <h3 class="ui small header">
     <code class="compact">rename(Closure c)</code>
 </h3>
-<p>Set the closure that will be used </p>
+<p>Set the closure that will be used to compute each rendered frame file name. The closure take as a parameter the frame file name as described in the <code class="compact">into</code> method above.</p>
+<div class="ui positive icon message">
+    <i class="lab icon"></i>
+    <div class="content">See an <a href="#rename-output-file">example</a> of a <code>RenderAnimation</code> task with a <code class="compact">rename</code> closure.</div>
+</div>
+<h2 class="ui dividing header">Use cases</h2>
+<a name="rename-output-file"></a>
+<h3>Rename output files</h3>
+<div class="ui stacked segments">
+    <div class="ui inverted stacked grey segment">
+<figure class="highlight"><pre><code class="language-groovy" data-lang="groovy"><span class="n">task</span> <span class="nf">renderAnimation</span><span class="o">(</span><span class="nl">type:</span> <span class="n">com</span><span class="o">.</span><span class="na">eowise</span><span class="o">.</span><span class="na">blender</span><span class="o">.</span><span class="na">render</span><span class="o">.</span><span class="na">RenderAnimation</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">scene</span> <span class="s1">'HeroRun'</span>
+    <span class="n">from</span> <span class="s1">'3d/actors.blend'</span>
+    <span class="n">into</span> <span class="s1">'assets/actors/'</span>
+    <span class="n">start</span> <span class="mi">1</span>
+    <span class="n">end</span> <span class="mi">100</span>
+    <span class="n">rename</span> <span class="o">{</span> 
+        <span class="n">filename</span> <span class="o">-&gt;</span>
+            <span class="o">(</span><span class="n">filename</span> <span class="o">=~</span> <span class="s">/[\w ]+-(\d{4})\.png/</span><span class="o">).</span><span class="na">group</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="o">+</span> <span class="s1">'.png'</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre></figure>
+    </div>
+</div>
+<h3>Batch render multiple animations</h3>
+<div class="ui warning icon message">
+    <i class="write icon"></i>
+    <div class="content">Work in progress</div>
+</div>
 
             </div>
         </div>
