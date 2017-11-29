@@ -10,13 +10,17 @@ import spock.lang.Specification
 class RenderImageTest extends Specification {
 
     void "render an image"() {
+        def result = new File("src/test/resources/cube.png")
+
+        result.delete()
+
         when:
         GradleRunner.create()
-                .withProjectDir(new File(""))
+                .withProjectDir(new File("src/test/resources"))
                 .withArguments("testRenderImage", "--stacktrace", "--rerun-tasks")
-                .build();
+                .build()
 
         then:
-        new File("cube.png").exists()
+        result.exists()
     }
 }

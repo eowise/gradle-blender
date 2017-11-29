@@ -3,7 +3,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath 'com.eowise:blender:0.5.0'
+        classpath 'com.eowise:blender:0.5.2'
     }
 }
 

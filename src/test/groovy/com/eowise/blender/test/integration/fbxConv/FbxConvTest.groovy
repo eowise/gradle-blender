@@ -9,13 +9,17 @@ import spock.lang.Specification
 class FbxConvTest extends Specification {
 
     def "convert FBX to G3DJ"() {
+        def result = new File("src/test/resources/cube.g3dj")
+
+        result.delete()
+
         when:
         GradleRunner.create()
-                .withProjectDir(new File(""))
+                .withProjectDir(new File("src/test/resources"))
                 .withArguments("testFbxConv", "--stacktrace", "--rerun-tasks")
-                .build();
+                .build()
 
         then:
-        new File("cube.g3dj").exists()
+        result.exists()
     }
 }
