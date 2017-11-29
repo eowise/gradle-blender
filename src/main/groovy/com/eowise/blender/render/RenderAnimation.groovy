@@ -61,7 +61,7 @@ class RenderAnimation extends DefaultTask {
 
         project.copy {
             from temporaryDir
-            into spec.getOutputPath()
+            into getOutputDirectory()
             rename spec.rename
         }
     }
