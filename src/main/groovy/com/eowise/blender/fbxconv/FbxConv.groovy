@@ -122,8 +122,6 @@ class FbxConv extends DefaultTask {
                 removedFiles.from(remove.file)
         }
 
-        FileTree fbxFiles = project.fileTree(baseDir).matching(patternSet)
-
         fbxFiles.visit {
             FileVisitDetails visitor ->
                 if (!incrementalInputs.isIncremental() || changedFiles.contains(visitor.getFile())) {
